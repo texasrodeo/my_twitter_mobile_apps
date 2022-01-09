@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
@@ -42,8 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               showPosts: (List<Post> postsToShow, String postsToShowString) {
                 viewToReturn = _showPostsBuilder(postsToShow);
-
-
               },
               errorLoading: () {
                 viewToReturn = _errorLoadingBuilder();
@@ -64,7 +64,6 @@ class _HomeScreenState extends State<HomeScreen> {
       child: RefreshIndicator(
         onRefresh: _pullRefresh,
         child: ListView.builder(
-          padding: EdgeInsets.all(16),
           shrinkWrap: true,
           physics: AlwaysScrollableScrollPhysics(),
           itemCount: postsToShow.length,
@@ -86,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
           },
 
         ),
-
       ),
       onEndOfPage: () {
         _homeScreenBloc.add(HomeScreenEvent.loadMore());

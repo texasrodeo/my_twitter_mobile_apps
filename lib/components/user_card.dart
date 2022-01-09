@@ -6,13 +6,14 @@ import 'package:my_twitter/models/user.dart';
 
 class UserCard extends StatelessWidget{
   final User user;
+  final double avatarSize = 60;
 
-  final VoidCallback? openSideMenu;
+  final int postsCount;
 
   const UserCard({
     Key? key,
     required this.user,
-    required this.openSideMenu
+    required this.postsCount
   }) : super(key: key);
 
   EdgeInsets get _bottomMargin => EdgeInsets.only(
@@ -34,12 +35,19 @@ class UserCard extends StatelessWidget{
     color: Colors.white70,
     child:  Align(
         alignment: Alignment.topLeft,
-          child: Row(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _buildUserAvatar(),
-              _buildUserName()
+              Row(
+                children: [
+                  _buildUserAvatar(),
+                  _buildUserName()
+                ],
+              ),
+              _buildPostsCount()
             ],
-          ),
+          )
         )
 
   );
@@ -51,10 +59,12 @@ class UserCard extends StatelessWidget{
       child: Image.network(
         user.imageUrl,
         fit: BoxFit.fill,
+        width: avatarSize,
+        height: avatarSize,
       ),
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.white70, width: 1),
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(avatarSize/2),
       ),
       elevation: 5,
       margin: EdgeInsets.all(10),
@@ -68,39 +78,38 @@ class UserCard extends StatelessWidget{
         textAlign: TextAlign.end,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
-            fontWeight: FontWeight.bold,
             fontSize: 35
         ),
       )
   );
 
-//  Widget _buildSideMenuButton(){
-//    return IconButton(
-//        onPressed: openSideMenu,
-//        icon: const Icon(Icons.more_vert)
-//    );
-//  }
 
   @override
   Widget build(BuildContext buildContext){
       return Container(
         margin: _bottomMargin,
-        height: 80,
+        height: 100,
         decoration: _boxDecoration,
-        child: Positioned.fill(
-            child: Row(
+        child: Row(
               children: [
                 _buildUserData(),
-//                Align(
-//                    alignment: Alignment.topRight,
-//                    child: _buildSideMenuButton()
-//                )
 
               ],
 
             ),
-        )
 
       );
   }
+
+  Widget _buildPostsCount()=>Container(
+    margin: EdgeInsets.only(
+      left: 5
+    ),
+    child: Text(
+      "Посты: " + postsCount.toString(),
+      textAlign: TextAlign.end,
+      overflow: TextOverflow.ellipsis,
+      style: const TextStyle(fontSize: 15),
+    ),
+  );
 }

@@ -224,7 +224,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen>{
               context,
               PageRouteBuilder(
                   opaque: false,
-                  pageBuilder: (_, __, ___) => UserProfileScreen()
+                  pageBuilder: (_, __, ___) => UserProfileScreen(user: null)
               ),
             );
           },

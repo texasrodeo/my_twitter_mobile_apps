@@ -21,7 +21,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
 
   var logger = Logger();
 
-  int page = 1, perPage = 5;
+  int page = 1, perPage = 2;
   List<Post> postsToShow = [];
   String requestUrl = '${Constants.apiBaseUrl}posts';
 
@@ -115,6 +115,22 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
     }
   }
 
+  Future<HomeScreenState> processLoadMore() async {
+    try {
+      final result = await dio.get(
+        requestUrl,
+        queryParameters: parameters,
+      );
+
+      parseResponse(result);
+      return _ShowPosts(postsToShow, postsToShow.toString());
+
+    } catch (e) {
+      print(e);
+      return _ErrorLoading();
+    }
+  }
+
   @override
   Stream<HomeScreenState> mapEventToState(
       HomeScreenEvent event,
@@ -130,7 +146,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
     if (event is _LoadMore) {
       page += 1;
 
-      yield await processLoadSignal();
+      yield await processLoadMore();
     }
 
     if(event is _Refresh){

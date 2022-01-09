@@ -1,36 +1,52 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 
-class OnboardingScreen extends StatelessWidget{
+class OnboardingScreen extends StatefulWidget {
+  final String nextRoute;
+
+
+  OnboardingScreen({required this.nextRoute});
+
+  @override
+  State<StatefulWidget> createState() => _OnboardingScreenState();
+}
+
+
+class _OnboardingScreenState extends State<OnboardingScreen>{
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   final onboardingPagesList = [
     PageModel(
       widget: Column(
         children: [
           Container(
               padding: EdgeInsets.only(bottom: 45.0),
-              child: Image.asset('assets/images/logo.png',
-                  color: pageImageColor)),
+              child: Image.asset(
+                  'assets/images/logo.png')),
           Container(
-              width: double.infinity,
+//              width: double.infinity,
+              margin: EdgeInsets.only(
+                bottom: 10
+              ),
               child: Text(
                   'Добро пожаловать в My Twitter',
                 textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
+//                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
-                    fontWeight: FontWeight.bold,
                     fontSize: 30
                 ),)
           ),
           Container(
-            width: double.infinity,
+//            width: double.infinity,
             child: Text(
               'Здесь вы можете делиться своими мыслями и фотографиями',
               textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
+//              overflow: TextOverflow.ellipsis,
               style: const TextStyle(
-                  fontWeight: FontWeight.bold,
                   fontSize: 22
               ),
             ),
@@ -38,48 +54,27 @@ class OnboardingScreen extends StatelessWidget{
         ],
       ),
     ),
-//    PageModel(
-//      widget: Column(
-//        children: [
-//          Image.asset('assets/images/twitter.png', color: pageImageColor),
-//          Text('CHANGE AND RISE', style: pageTitleStyle),
-//          Text(
-//            'Give others access to any file or folder you choose',
-//            style: pageInfoStyle,
-//          )
-//        ],
-//      ),
-//    ),
-//    PageModel(
-//      widget: Column(
-//        children: [
-//          Image.asset('assets/images/instagram.png', color: pageImageColor),
-//          Text('EASY ACCESS', style: pageTitleStyle),
-//          Text(
-//            'Reach your files anytime from any devices anywhere',
-//            style: pageInfoStyle,
-//          ),
-//        ],
-//      ),
-//    ),
+
   ];
 
   @override
   Widget build(BuildContext context) {
     return Onboarding(
-        isSkippable: true,
+        isSkippable: false,
         proceedButtonStyle: ProceedButtonStyle(
           proceedButtonRoute: (context) {
-            return Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Container(),
-              ),
-                  (route) => false,
-            );
+            return Navigator.of(context).pushReplacementNamed(widget.nextRoute);
           },
+          proceedpButtonText: Text(
+              'Вперед',
+              style: TextStyle(
+                color: Colors.white
+              ),
+          ),
+          proceedButtonColor: Colors.black,
         ),
 
+        background: Colors.white,
         pages: onboardingPagesList,
         indicator: Indicator(
           indicatorDesign: IndicatorDesign.line(
@@ -88,12 +83,6 @@ class OnboardingScreen extends StatelessWidget{
             ),
           ),
         ),
-        //-------------Other properties--------------
-        //Color background,
-        //EdgeInsets pagesContentPadding
-        //EdgeInsets titleAndInfoPadding
-        //EdgeInsets footerPadding
-        //SkipButtonStyle skipButtonStyle
     );
   }
 

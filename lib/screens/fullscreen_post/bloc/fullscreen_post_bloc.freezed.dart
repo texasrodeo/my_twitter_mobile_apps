@@ -30,6 +30,12 @@ class _$FullscreenPostEventTearOff {
   _LoadMoreComments loadMoreComments() {
     return const _LoadMoreComments();
   }
+
+  _AddComment addComment(String text) {
+    return _AddComment(
+      text,
+    );
+  }
 }
 
 /// @nodoc
@@ -42,6 +48,7 @@ mixin _$FullscreenPostEvent {
     required TResult Function(Post post) started,
     required TResult Function() changeLikeStatus,
     required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -49,6 +56,7 @@ mixin _$FullscreenPostEvent {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +64,7 @@ mixin _$FullscreenPostEvent {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +73,7 @@ mixin _$FullscreenPostEvent {
     required TResult Function(_Started value) started,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +81,7 @@ mixin _$FullscreenPostEvent {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +89,7 @@ mixin _$FullscreenPostEvent {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -174,6 +186,7 @@ class _$_Started implements _Started {
     required TResult Function(Post post) started,
     required TResult Function() changeLikeStatus,
     required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
   }) {
     return started(post);
   }
@@ -184,6 +197,7 @@ class _$_Started implements _Started {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
   }) {
     return started?.call(post);
   }
@@ -194,6 +208,7 @@ class _$_Started implements _Started {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -208,6 +223,7 @@ class _$_Started implements _Started {
     required TResult Function(_Started value) started,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
   }) {
     return started(this);
   }
@@ -218,6 +234,7 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
   }) {
     return started?.call(this);
   }
@@ -228,6 +245,7 @@ class _$_Started implements _Started {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -290,6 +308,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     required TResult Function(Post post) started,
     required TResult Function() changeLikeStatus,
     required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
   }) {
     return changeLikeStatus();
   }
@@ -300,6 +319,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
   }) {
     return changeLikeStatus?.call();
   }
@@ -310,6 +330,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
     required TResult orElse(),
   }) {
     if (changeLikeStatus != null) {
@@ -324,6 +345,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     required TResult Function(_Started value) started,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
   }) {
     return changeLikeStatus(this);
   }
@@ -334,6 +356,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
   }) {
     return changeLikeStatus?.call(this);
   }
@@ -344,6 +367,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
     required TResult orElse(),
   }) {
     if (changeLikeStatus != null) {
@@ -401,6 +425,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     required TResult Function(Post post) started,
     required TResult Function() changeLikeStatus,
     required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
   }) {
     return loadMoreComments();
   }
@@ -411,6 +436,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
   }) {
     return loadMoreComments?.call();
   }
@@ -421,6 +447,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     TResult Function(Post post)? started,
     TResult Function()? changeLikeStatus,
     TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
     required TResult orElse(),
   }) {
     if (loadMoreComments != null) {
@@ -435,6 +462,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     required TResult Function(_Started value) started,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
   }) {
     return loadMoreComments(this);
   }
@@ -445,6 +473,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
   }) {
     return loadMoreComments?.call(this);
   }
@@ -455,6 +484,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
     TResult Function(_Started value)? started,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
     required TResult orElse(),
   }) {
     if (loadMoreComments != null) {
@@ -466,6 +496,151 @@ class _$_LoadMoreComments implements _LoadMoreComments {
 
 abstract class _LoadMoreComments implements FullscreenPostEvent {
   const factory _LoadMoreComments() = _$_LoadMoreComments;
+}
+
+/// @nodoc
+abstract class _$AddCommentCopyWith<$Res> {
+  factory _$AddCommentCopyWith(
+          _AddComment value, $Res Function(_AddComment) then) =
+      __$AddCommentCopyWithImpl<$Res>;
+  $Res call({String text});
+}
+
+/// @nodoc
+class __$AddCommentCopyWithImpl<$Res>
+    extends _$FullscreenPostEventCopyWithImpl<$Res>
+    implements _$AddCommentCopyWith<$Res> {
+  __$AddCommentCopyWithImpl(
+      _AddComment _value, $Res Function(_AddComment) _then)
+      : super(_value, (v) => _then(v as _AddComment));
+
+  @override
+  _AddComment get _value => super._value as _AddComment;
+
+  @override
+  $Res call({
+    Object? text = freezed,
+  }) {
+    return _then(_AddComment(
+      text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_AddComment implements _AddComment {
+  const _$_AddComment(this.text);
+
+  @override
+  final String text;
+
+  @override
+  String toString() {
+    return 'FullscreenPostEvent.addComment(text: $text)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _AddComment &&
+            (identical(other.text, text) || other.text == text));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, text);
+
+  @JsonKey(ignore: true)
+  @override
+  _$AddCommentCopyWith<_AddComment> get copyWith =>
+      __$AddCommentCopyWithImpl<_AddComment>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Post post) started,
+    required TResult Function() changeLikeStatus,
+    required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
+  }) {
+    return addComment(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Post post)? started,
+    TResult Function()? changeLikeStatus,
+    TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
+  }) {
+    return addComment?.call(text);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Post post)? started,
+    TResult Function()? changeLikeStatus,
+    TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
+    required TResult orElse(),
+  }) {
+    if (addComment != null) {
+      return addComment(text);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
+    required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
+  }) {
+    return addComment(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
+  }) {
+    return addComment?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
+    required TResult orElse(),
+  }) {
+    if (addComment != null) {
+      return addComment(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddComment implements FullscreenPostEvent {
+  const factory _AddComment(String text) = _$_AddComment;
+
+  String get text;
+  @JsonKey(ignore: true)
+  _$AddCommentCopyWith<_AddComment> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

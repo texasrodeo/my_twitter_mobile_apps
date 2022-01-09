@@ -15,7 +15,7 @@ class CommentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Container(
-      margin: EdgeInsets.all(5),
+      margin: EdgeInsets.all(1),
       decoration: _boxDecoration,
       child: Row(
         children: [
@@ -38,11 +38,11 @@ class CommentCard extends StatelessWidget {
       child: Image.network(
         comment.author.imageUrl,
         fit: BoxFit.fill,
-        width: 20,
-        height: 20,
+        width: 30,
+        height: 30,
       ),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       elevation: 5,
       margin: EdgeInsets.all(5),
@@ -56,7 +56,6 @@ class CommentCard extends StatelessWidget {
         textAlign: TextAlign.end,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
-            fontWeight: FontWeight.bold,
             fontSize: 20
         ),
       )
@@ -68,16 +67,15 @@ class CommentCard extends StatelessWidget {
       textAlign: TextAlign.end,
       overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-          fontWeight: FontWeight.bold,
           fontSize: 30
       ),
     )
   );
 
   Decoration get _boxDecoration => BoxDecoration(
-    color: Colors.grey,
-    border: Border.symmetric(
-      vertical: BorderSide (
+//    color: Colors.grey,
+    border: Border(
+      bottom: BorderSide (
           width: 1,
           color: Colors.grey,
       ),

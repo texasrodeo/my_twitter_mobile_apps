@@ -80,7 +80,10 @@ class _SignInScreenState extends State<SignInScreen>{
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'Вход в систему'
+          'Вход в систему',
+          style: TextStyle(
+            fontSize: 30
+          ),
         ),
         Form(
           key: _formKey,
@@ -101,6 +104,7 @@ class _SignInScreenState extends State<SignInScreen>{
                 },
               ),
               TextFormField(
+                obscureText: true,
                 controller: _passwordController,
                 decoration: const InputDecoration(labelText:
                 'Пароль'),
@@ -111,6 +115,7 @@ class _SignInScreenState extends State<SignInScreen>{
                   return null;
                 },
               ),
+              _buildSignUpnLink(),
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 alignment: Alignment.center,
@@ -123,14 +128,6 @@ class _SignInScreenState extends State<SignInScreen>{
                   child: const Text('Войти'),
                 ),
               ),
-//             Container(
-//                  alignment: Alignment.center,
-//                    child: Text(_signInScreenBloc.isSignedIn() == null
-//                    ? ''
-//                        : (_success
-//                    ? 'Успешный вход!'
-//                    : 'Registration failed')),
-//              )
             ],
           ),
         )
@@ -147,10 +144,6 @@ class _SignInScreenState extends State<SignInScreen>{
           onPressed: () {
             Navigator.pop(
               context,
-//              PageRouteBuilder(
-//                  opaque: false,
-//                  pageBuilder: (_, __, ___) => SignInScreen()
-//              ),
             );
           },
           child: Text('OK'),
@@ -158,6 +151,33 @@ class _SignInScreenState extends State<SignInScreen>{
       ],
     );
   }
+
+  Widget _buildSignUpnLink(){ 
+    return Align(
+          alignment: Alignment.center,
+            child: Row(
+              children: [
+                TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(5),
+                    primary: Colors.blue,
+                    textStyle: const TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {
+                    navigateToSignIn();
+                  },
+                  child: const Text('Регистрация'),
+                ),
+              ],
+            )
+        );
+  }
+
+
+  void navigateToSignIn(){
+    Navigator.of(context).pushReplacementNamed(_signInScreenBloc.signUpScreenRoute);
+  }
+
 
 
 }

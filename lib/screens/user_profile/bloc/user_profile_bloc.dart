@@ -31,11 +31,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
     late User user;
     late int postsCount;
 
+    late bool isOwnProfile;
+
     late MainUserDetails userDetails;
 
     List<Post> postsToShow = [];
 
-//    String getUserDataUrl = '${Constants.apiBaseUrl}users/user';
     String getUserPostsUrl = '${Constants.apiBaseUrl}posts/user';
     String getPostsCountUrl = '${Constants.apiBaseUrl}posts/user/count';
     String getUserUrl = '${Constants.apiBaseUrl}users/user';
@@ -53,9 +54,18 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
     Future<UserProfileState> processLoadEvent(_Started event) async {
         bool isSignedIn = await _authService.isSignedIn();
         if(isSignedIn){
-            userDetails= MainUserDetails(
-                email: _authService.getUserEmail()!
-            );
+            if(event.user == null){
+                isOwnProfile = true;
+                userDetails= MainUserDetails(
+                    email: _authService.getUserEmail()!
+                );
+            }
+           else{
+                isOwnProfile = false;
+                userDetails= MainUserDetails(
+                    email: event.user!.id
+                );
+            }
             return processLoadSignal();
         }
         else{
@@ -77,6 +87,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
                 imageUrl: userResult.data['avatarUrl']
             );
             log("getting user posts");
+            log(user.id);
             final result = await dio.get(
                 getUserPostsUrl,
                 queryParameters: postsParameters,

@@ -1,5 +1,8 @@
 
 
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -7,6 +10,7 @@ import 'package:my_twitter/models/comment.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
 import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:my_twitter/services/auth/auth_service.dart';
 import 'package:my_twitter/utils/constants.dart';
 
 import '../../../main.dart';
@@ -18,15 +22,27 @@ part 'fullscreen_post_bloc.freezed.dart';
 Dio dio = Dio();
 
 class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
-  FullscreenPostBloc() : super(_Initial());
+
+  final AuthService _authService;
+
+  FullscreenPostBloc() : _authService = AuthService(), super(_Initial());
 
   late Post postToShow;
-  late List<Comment> postComments;
+  late List<Comment> postComments = [];
 
   int page = 1, perPage = 3;
   String requestUrl = '${Constants.apiBaseUrl}comments/post';
+  String addCommentUrl = '${Constants.apiBaseUrl}comments/add';
 
   var parameters = Map<String, dynamic>();
+
+  var addCommentparams = Map<String, dynamic>();
+
+  void buildAddCommentParams(String postId, String text, String authorId){
+    parameters['postId'] = postId;
+    parameters['text'] = text;
+    parameters['authorId'] = authorId;
+  }
 
   void buildParameters(String postId, String page, String perPage){
     parameters['postId'] = postId;
@@ -36,6 +52,7 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
 
   Future<FullscreenPostState> processLoadEvent(_Started event) async {
     postToShow = event.post;
+    buildParameters(event.post.id, this.page.toString(), this.perPage.toString());
     final result = await dio.get(
       requestUrl,
       queryParameters: parameters,
@@ -60,10 +77,10 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   void parseResponse(Response result) {
     final commentsList = result.data;
 
-
+    log(commentsList);
     for (var comment in commentsList) {
       var contain = postComments.where((element) =>
-      element.id == comment['id']);
+          element.id == comment['id']);
       if (contain.isNotEmpty) {
         int i = postComments.indexOf(contain.first);
         postComments.removeAt(i);
@@ -122,6 +139,34 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
     return _ShowPost(postToShow, postToShow.toString());
   }
 
+  Future<FullscreenPostState> addComment(_AddComment event) async {
+      String comment = event.text;
+
+      try {
+
+
+        buildAddCommentParams(postToShow.id, comment, _authService.getUserEmail()!);
+        Response response = await dio.post(
+          addCommentUrl,
+          data: jsonEncode(parameters),
+        );
+
+
+        if(response.statusCode == 200){
+          return _Initial();
+        }
+        else{
+          return _ErrorLoading();
+        }
+
+
+
+      } catch (e) {
+        print(e);
+        return _ErrorLoading();
+      }
+  }
+
   @override
   Stream<FullscreenPostState> mapEventToState(
       FullscreenPostEvent event,
@@ -138,6 +183,10 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
       page += 1;
 
       yield await loadMoreComments();
+    }
+
+    if(event is _AddComment){
+      yield await addComment(event);
     }
   }
 

@@ -16,7 +16,7 @@ class _FooterState extends State<Footer>{
   final List<Widget> _options = [
     HomeScreen(),
     AddPostScreen(),
-    UserProfileScreen()
+    UserProfileScreen(user: null)
   ];
 
 
@@ -51,7 +51,8 @@ class _FooterState extends State<Footer>{
             ),
           ],
 //          currentIndex: _selectedIndex,
-          iconSize: 40,
+
+          iconSize: 25,
           onTap: _onItemTap,
           elevation: 5,
           selectedItemColor: Colors.black,

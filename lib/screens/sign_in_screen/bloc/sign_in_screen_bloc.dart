@@ -17,6 +17,7 @@ class SignInScreenBloc extends Bloc<SignInScreenEvent, SignInScreenState>{
   SignInScreenBloc():
         _authService = AuthService(), super(_Initial());
 
+  final String signUpScreenRoute =  "/SignUp";
 
 
   Future<bool> isSignedIn() async {

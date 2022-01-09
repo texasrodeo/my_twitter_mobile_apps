@@ -672,8 +672,10 @@ abstract class _Unauthicated implements UserProfileState {
 class _$UserProfileEventTearOff {
   const _$UserProfileEventTearOff();
 
-  _Started started() {
-    return const _Started();
+  _Started started(User? user) {
+    return _Started(
+      user,
+    );
   }
 
   _ChangeLikeStatus changeLikeStatus(
@@ -700,7 +702,7 @@ const $UserProfileEvent = _$UserProfileEventTearOff();
 mixin _$UserProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(User? user) started,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() signOut,
@@ -709,7 +711,7 @@ mixin _$UserProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -718,7 +720,7 @@ mixin _$UserProfileEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -774,6 +776,9 @@ class _$UserProfileEventCopyWithImpl<$Res>
 abstract class _$StartedCopyWith<$Res> {
   factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
       __$StartedCopyWithImpl<$Res>;
+  $Res call({User? user});
+
+  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -784,55 +789,88 @@ class __$StartedCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
 
   @override
   _Started get _value => super._value as _Started;
+
+  @override
+  $Res call({
+    Object? user = freezed,
+  }) {
+    return _then(_Started(
+      user == freezed
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as User?,
+    ));
+  }
+
+  @override
+  $UserCopyWith<$Res>? get user {
+    if (_value.user == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.user!, (value) {
+      return _then(_value.copyWith(user: value));
+    });
+  }
 }
 
 /// @nodoc
 
 class _$_Started implements _Started {
-  const _$_Started();
+  const _$_Started(this.user);
+
+  @override
+  final User? user;
 
   @override
   String toString() {
-    return 'UserProfileEvent.started()';
+    return 'UserProfileEvent.started(user: $user)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _Started);
+        (other.runtimeType == runtimeType &&
+            other is _Started &&
+            (identical(other.user, user) || other.user == user));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, user);
+
+  @JsonKey(ignore: true)
+  @override
+  _$StartedCopyWith<_Started> get copyWith =>
+      __$StartedCopyWithImpl<_Started>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(User? user) started,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() signOut,
     required TResult Function() loadMore,
   }) {
-    return started();
+    return started(user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
     TResult Function()? loadMore,
   }) {
-    return started?.call();
+    return started?.call(user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -840,7 +878,7 @@ class _$_Started implements _Started {
     required TResult orElse(),
   }) {
     if (started != null) {
-      return started();
+      return started(user);
     }
     return orElse();
   }
@@ -884,7 +922,12 @@ class _$_Started implements _Started {
 }
 
 abstract class _Started implements UserProfileEvent {
-  const factory _Started() = _$_Started;
+  const factory _Started(User? user) = _$_Started;
+
+  User? get user;
+  @JsonKey(ignore: true)
+  _$StartedCopyWith<_Started> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -960,7 +1003,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(User? user) started,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() signOut,
@@ -972,7 +1015,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -984,7 +1027,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -1084,7 +1127,7 @@ class _$_SignOut implements _SignOut {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(User? user) started,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() signOut,
@@ -1096,7 +1139,7 @@ class _$_SignOut implements _SignOut {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -1108,7 +1151,7 @@ class _$_SignOut implements _SignOut {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -1201,7 +1244,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function(User? user) started,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() signOut,
@@ -1213,7 +1256,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,
@@ -1225,7 +1268,7 @@ class _$_LoadMore implements _LoadMore {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function(User? user)? started,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? signOut,

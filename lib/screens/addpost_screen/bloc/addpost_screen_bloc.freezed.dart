@@ -620,16 +620,16 @@ class _$AddPostScreenStateTearOff {
     return const _ShowSuccess();
   }
 
-  _ShowImagePicker showImagePicker() {
-    return const _ShowImagePicker();
-  }
-
   _Unauthicated unauthicated() {
     return const _Unauthicated();
   }
 
   _ErrorLoading errorLoading() {
     return const _ErrorLoading();
+  }
+
+  _UploadingPost uploadingPost() {
+    return const _UploadingPost();
   }
 }
 
@@ -644,9 +644,9 @@ mixin _$AddPostScreenState {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -655,9 +655,9 @@ mixin _$AddPostScreenState {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -666,9 +666,9 @@ mixin _$AddPostScreenState {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -678,9 +678,9 @@ mixin _$AddPostScreenState {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -689,9 +689,9 @@ mixin _$AddPostScreenState {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -700,9 +700,9 @@ mixin _$AddPostScreenState {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -768,9 +768,9 @@ class _$_Initial implements _Initial {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return initial();
   }
@@ -782,9 +782,9 @@ class _$_Initial implements _Initial {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return initial?.call();
   }
@@ -796,9 +796,9 @@ class _$_Initial implements _Initial {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -814,9 +814,9 @@ class _$_Initial implements _Initial {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return initial(this);
   }
@@ -828,9 +828,9 @@ class _$_Initial implements _Initial {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return initial?.call(this);
   }
@@ -842,9 +842,9 @@ class _$_Initial implements _Initial {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -903,9 +903,9 @@ class _$_ShowScreen implements _ShowScreen {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return showScreen();
   }
@@ -917,9 +917,9 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return showScreen?.call();
   }
@@ -931,9 +931,9 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (showScreen != null) {
@@ -949,9 +949,9 @@ class _$_ShowScreen implements _ShowScreen {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return showScreen(this);
   }
@@ -963,9 +963,9 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return showScreen?.call(this);
   }
@@ -977,9 +977,9 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (showScreen != null) {
@@ -1038,9 +1038,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return showScreenWithImage();
   }
@@ -1052,9 +1052,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return showScreenWithImage?.call();
   }
@@ -1066,9 +1066,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (showScreenWithImage != null) {
@@ -1084,9 +1084,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return showScreenWithImage(this);
   }
@@ -1098,9 +1098,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return showScreenWithImage?.call(this);
   }
@@ -1112,9 +1112,9 @@ class _$_ShowScreenWithImage implements _ShowScreenWithImage {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (showScreenWithImage != null) {
@@ -1173,9 +1173,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return showSuccess();
   }
@@ -1187,9 +1187,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return showSuccess?.call();
   }
@@ -1201,9 +1201,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (showSuccess != null) {
@@ -1219,9 +1219,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return showSuccess(this);
   }
@@ -1233,9 +1233,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return showSuccess?.call(this);
   }
@@ -1247,9 +1247,9 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (showSuccess != null) {
@@ -1261,141 +1261,6 @@ class _$_ShowSuccess implements _ShowSuccess {
 
 abstract class _ShowSuccess implements AddPostScreenState {
   const factory _ShowSuccess() = _$_ShowSuccess;
-}
-
-/// @nodoc
-abstract class _$ShowImagePickerCopyWith<$Res> {
-  factory _$ShowImagePickerCopyWith(
-          _ShowImagePicker value, $Res Function(_ShowImagePicker) then) =
-      __$ShowImagePickerCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$ShowImagePickerCopyWithImpl<$Res>
-    extends _$AddPostScreenStateCopyWithImpl<$Res>
-    implements _$ShowImagePickerCopyWith<$Res> {
-  __$ShowImagePickerCopyWithImpl(
-      _ShowImagePicker _value, $Res Function(_ShowImagePicker) _then)
-      : super(_value, (v) => _then(v as _ShowImagePicker));
-
-  @override
-  _ShowImagePicker get _value => super._value as _ShowImagePicker;
-}
-
-/// @nodoc
-
-class _$_ShowImagePicker implements _ShowImagePicker {
-  const _$_ShowImagePicker();
-
-  @override
-  String toString() {
-    return 'AddPostScreenState.showImagePicker()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ShowImagePicker);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() showScreen,
-    required TResult Function() showScreenWithImage,
-    required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
-    required TResult Function() unauthicated,
-    required TResult Function() errorLoading,
-  }) {
-    return showImagePicker();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? showScreen,
-    TResult Function()? showScreenWithImage,
-    TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
-    TResult Function()? unauthicated,
-    TResult Function()? errorLoading,
-  }) {
-    return showImagePicker?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? showScreen,
-    TResult Function()? showScreenWithImage,
-    TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
-    TResult Function()? unauthicated,
-    TResult Function()? errorLoading,
-    required TResult orElse(),
-  }) {
-    if (showImagePicker != null) {
-      return showImagePicker();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(_ShowScreen value) showScreen,
-    required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
-    required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
-    required TResult Function(_Unauthicated value) unauthicated,
-    required TResult Function(_ErrorLoading value) errorLoading,
-  }) {
-    return showImagePicker(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ShowScreen value)? showScreen,
-    TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
-    TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
-    TResult Function(_Unauthicated value)? unauthicated,
-    TResult Function(_ErrorLoading value)? errorLoading,
-  }) {
-    return showImagePicker?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(_ShowScreen value)? showScreen,
-    TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
-    TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
-    TResult Function(_Unauthicated value)? unauthicated,
-    TResult Function(_ErrorLoading value)? errorLoading,
-    required TResult orElse(),
-  }) {
-    if (showImagePicker != null) {
-      return showImagePicker(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ShowImagePicker implements AddPostScreenState {
-  const factory _ShowImagePicker() = _$_ShowImagePicker;
 }
 
 /// @nodoc
@@ -1443,9 +1308,9 @@ class _$_Unauthicated implements _Unauthicated {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return unauthicated();
   }
@@ -1457,9 +1322,9 @@ class _$_Unauthicated implements _Unauthicated {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return unauthicated?.call();
   }
@@ -1471,9 +1336,9 @@ class _$_Unauthicated implements _Unauthicated {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (unauthicated != null) {
@@ -1489,9 +1354,9 @@ class _$_Unauthicated implements _Unauthicated {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return unauthicated(this);
   }
@@ -1503,9 +1368,9 @@ class _$_Unauthicated implements _Unauthicated {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return unauthicated?.call(this);
   }
@@ -1517,9 +1382,9 @@ class _$_Unauthicated implements _Unauthicated {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (unauthicated != null) {
@@ -1578,9 +1443,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function() showScreen,
     required TResult Function() showScreenWithImage,
     required TResult Function() showSuccess,
-    required TResult Function() showImagePicker,
     required TResult Function() unauthicated,
     required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
   }) {
     return errorLoading();
   }
@@ -1592,9 +1457,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
   }) {
     return errorLoading?.call();
   }
@@ -1606,9 +1471,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? showScreen,
     TResult Function()? showScreenWithImage,
     TResult Function()? showSuccess,
-    TResult Function()? showImagePicker,
     TResult Function()? unauthicated,
     TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
@@ -1624,9 +1489,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
     required TResult Function(_ShowSuccess value) showSuccess,
-    required TResult Function(_ShowImagePicker value) showImagePicker,
     required TResult Function(_Unauthicated value) unauthicated,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
   }) {
     return errorLoading(this);
   }
@@ -1638,9 +1503,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
   }) {
     return errorLoading?.call(this);
   }
@@ -1652,9 +1517,9 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
     TResult Function(_ShowSuccess value)? showSuccess,
-    TResult Function(_ShowImagePicker value)? showImagePicker,
     TResult Function(_Unauthicated value)? unauthicated,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
@@ -1666,4 +1531,139 @@ class _$_ErrorLoading implements _ErrorLoading {
 
 abstract class _ErrorLoading implements AddPostScreenState {
   const factory _ErrorLoading() = _$_ErrorLoading;
+}
+
+/// @nodoc
+abstract class _$UploadingPostCopyWith<$Res> {
+  factory _$UploadingPostCopyWith(
+          _UploadingPost value, $Res Function(_UploadingPost) then) =
+      __$UploadingPostCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UploadingPostCopyWithImpl<$Res>
+    extends _$AddPostScreenStateCopyWithImpl<$Res>
+    implements _$UploadingPostCopyWith<$Res> {
+  __$UploadingPostCopyWithImpl(
+      _UploadingPost _value, $Res Function(_UploadingPost) _then)
+      : super(_value, (v) => _then(v as _UploadingPost));
+
+  @override
+  _UploadingPost get _value => super._value as _UploadingPost;
+}
+
+/// @nodoc
+
+class _$_UploadingPost implements _UploadingPost {
+  const _$_UploadingPost();
+
+  @override
+  String toString() {
+    return 'AddPostScreenState.uploadingPost()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _UploadingPost);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() showScreen,
+    required TResult Function() showScreenWithImage,
+    required TResult Function() showSuccess,
+    required TResult Function() unauthicated,
+    required TResult Function() errorLoading,
+    required TResult Function() uploadingPost,
+  }) {
+    return uploadingPost();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? showScreen,
+    TResult Function()? showScreenWithImage,
+    TResult Function()? showSuccess,
+    TResult Function()? unauthicated,
+    TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
+  }) {
+    return uploadingPost?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? showScreen,
+    TResult Function()? showScreenWithImage,
+    TResult Function()? showSuccess,
+    TResult Function()? unauthicated,
+    TResult Function()? errorLoading,
+    TResult Function()? uploadingPost,
+    required TResult orElse(),
+  }) {
+    if (uploadingPost != null) {
+      return uploadingPost();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ShowScreen value) showScreen,
+    required TResult Function(_ShowScreenWithImage value) showScreenWithImage,
+    required TResult Function(_ShowSuccess value) showSuccess,
+    required TResult Function(_Unauthicated value) unauthicated,
+    required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_UploadingPost value) uploadingPost,
+  }) {
+    return uploadingPost(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowScreen value)? showScreen,
+    TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
+    TResult Function(_ShowSuccess value)? showSuccess,
+    TResult Function(_Unauthicated value)? unauthicated,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
+  }) {
+    return uploadingPost?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowScreen value)? showScreen,
+    TResult Function(_ShowScreenWithImage value)? showScreenWithImage,
+    TResult Function(_ShowSuccess value)? showSuccess,
+    TResult Function(_Unauthicated value)? unauthicated,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_UploadingPost value)? uploadingPost,
+    required TResult orElse(),
+  }) {
+    if (uploadingPost != null) {
+      return uploadingPost(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadingPost implements AddPostScreenState {
+  const factory _UploadingPost() = _$_UploadingPost;
 }

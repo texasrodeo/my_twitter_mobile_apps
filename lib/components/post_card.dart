@@ -1,17 +1,16 @@
-
-import 'dart:developer';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/screens/fullscreen_post/fullscreen_post_screen.dart';
 import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
 
 
-
 class PostCard extends StatelessWidget {
   final Post post;
   final VoidCallback? onLikeTap;
   final int index;
+
+  final double? _profilePictureSize = 50;
 
   const PostCard({
     Key? key,
@@ -25,194 +24,211 @@ class PostCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: _bottomMargin,
-        height: 625,
+        margin: _Margin,
+        padding: _Padding,
         decoration: _boxDecoration,
         child: Column(
-              children: [
-                  _buildUserData(context),
-                  Container(
-//                    color: Colors.green,
-                    child: GestureDetector(
-                      child: _buildPost(),
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _buildUserData(context),
+            Padding(
+              child:  Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SizedBox(height: 5.0),
+                    _buildText(context),
+                    SizedBox(height: 5.0,),
+                  ]
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+            ),
+             _buildImage(context),
 
-                      onTap: (){
-                        _openFullScreen(context);
-                      },
-                    ),
-                  ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: _buildPostStats(),
+            ),
+          ],
+        )
 
-
-                  GestureDetector(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.black.withOpacity(0.02)),
-                    ),
-                      onTap: (){
-                        log("opening profile");
-                        _openFullScreen(context);
-                        },
-                  ),
-
-
-
-              ]
-        ),
       );
   }
 
-  EdgeInsets get _bottomMargin => EdgeInsets.only(
-    bottom: 30,
+  EdgeInsets get _Margin => EdgeInsets.symmetric(
+    vertical: 4.0,
+  );
+
+  EdgeInsets get _Padding => EdgeInsets.symmetric(
+    vertical: 8.0,
   );
 
   Decoration get _boxDecoration => BoxDecoration(
-    borderRadius: BorderRadius.only(
-      topRight: Radius.circular(10),
-      topLeft: Radius.circular(10),
-      bottomLeft: Radius.circular(10),
-      bottomRight: Radius.circular(10),
-    ),
-//    color: Colors.grey,
-    border: Border.all(
-      color: Colors.grey,
-      width: 1,
+    border: Border(
+      bottom: BorderSide(color: Colors.grey)
     ),
   );
 
-  Widget _buildUserData(BuildContext context) => Container(
-    child:  Align(
-        alignment: Alignment.topLeft,
-        child: GestureDetector(
-          onTap: () {
-            _openUserProfile(context);
-          },
-          child: Row(
-            children: [
-              _buildUserAvatar(),
-              _buildUserName()
-            ],
-          ),
-        )
-
-    ),
-  );
-
-  Widget _buildPost() => Hero(
-    tag: post.id,
-    child: Container(
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Card(
-              semanticContainer: true,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: Image.network(
-                post.imageUrl,
-                fit: BoxFit.fill,
-              ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              elevation: 5,
-              margin: EdgeInsets.all(10),
-
-            ),
-          ),
-
-          Align(
-             child: Text(
-                post.text,
-                textAlign: TextAlign.end,
-                overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 30
-                ),
-              )
-          ),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child:Row(
+  Widget _buildUserData(BuildContext context) => Row(
+      children: [
+        _buildUserAvatar(context),
+        SizedBox(width: 4.0),
+        Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildLikeIcon(),
-                _buildCommentIcon(),
-                _buildShareIcon()
+                _buildUserName(context),
               ],
+            )
+        ),
+        PopupMenuButton(
+            onSelected: (result) {
+              if (result == 1) {
+                  _sendComplaintForPost(context);
+              }
+              else if (result == 2){
+                  _sendComplaintForUser(context);
+              }
+            },
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: Text("Пожаловаться на пост"),
+                value: 1,
+              ),
+              PopupMenuItem(
+                child: Text("Заблокировать автора"),
+                value: 2,
+              ),
+            ]
+        )
+//        IconButton(
+//            icon: const Icon(Icons.more_horiz),
+//            onPressed: () => print('More'),
+//        ),
+      ]
+  );
+
+
+  Widget _buildText(BuildContext context) => GestureDetector(
+      onTap: (){
+        _openFullScreen(context);
+      },
+      child: Text(
+        post.text,
+        style: TextStyle(
+            fontSize: 18
+        ),
+      )
+  );
+
+
+  Widget _buildImage(BuildContext context) => GestureDetector(
+      onTap: (){
+        _openFullScreen(context);
+      },
+      child: Container(
+        height: 350,
+        margin: EdgeInsets.only(
+            bottom: 8.0
+        ),
+//        child: Image.network(
+//          post.imageUrl,
+//          fit: BoxFit.fill,
+//        ),
+        child: Card(
+          child: CachedNetworkImage(
+            progressIndicatorBuilder: (context, url, progress) => Center(
+              child: CircularProgressIndicator(
+                value: progress.progress,
+              ),
             ),
-          )
-        ],
-      ),
-    )
-  );
-
-  Widget _buildLikeIcon() => Container(
-    padding: EdgeInsets.symmetric(
-      vertical: 1,
-    ),
-    margin: EdgeInsets.all(5),
-    child: GestureDetector(
-      onTap: onLikeTap,
-      child: Icon(
-        post.likeStatus == LikeStatus.inactive ? Icons.favorite_border_sharp : Icons.favorite,
-        color: post.likeStatus == LikeStatus.inactive ? Colors.white : Colors.redAccent,
-        size: 40,
-      ),
-    ),
-  );
-
-  Widget _buildCommentIcon() => Container(
-    padding: EdgeInsets.symmetric(
-      vertical: 1,
-    ),
-    margin: EdgeInsets.all(5),
-    child: GestureDetector(
-      child: Icon(
-        Icons.comment,
-        size: 40
-      ),
-    ),
+            imageUrl: post.imageUrl,
+            fit: BoxFit.fill,
+          ),
+        ),
+      )
   );
 
 
-  Widget _buildShareIcon() => Container(
-    padding: EdgeInsets.symmetric(
-      vertical: 1,
+
+  Widget _buildPostStats() =>  Container(
+    margin: EdgeInsets.only(
+      bottom: 6.0
     ),
-    margin: EdgeInsets.all(5),
-    child: GestureDetector(
-      child: Icon(
-          Icons.share,
-        size: 40,
-      ),
+    child: Row(
+      children: [
+        _PostButton(
+          icon: Icon(
+            post.likeStatus == LikeStatus.inactive ? Icons.favorite_outline : Icons.favorite,
+            color: post.likeStatus == LikeStatus.inactive ? Colors.black : Colors.redAccent,
+            size: 30,
+          ),
+          label: 'Like',
+          onTap: () => onLikeTap,
+        ),
+        _PostButton(
+          icon: Icon(
+              Icons.comment,
+              size: 30
+          ),
+          label: 'Comment',
+          onTap: () => print('Comment'),
+        ),
+        _PostButton(
+          icon: Icon(
+            Icons.share,
+            size: 30,
+          ),
+          label: 'Share',
+          onTap: () => print('Share'),
+        )
+      ],
     ),
   );
 
-  Widget _buildUserAvatar() => Container(
+
+
+  Widget _buildUserAvatar(BuildContext context) =>  GestureDetector(
+    onTap: (){
+      _openUserProfile(context);
+    },
     child: Card(
-      semanticContainer: true,
+      semanticContainer: false,
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Image.network(
-        post.author.imageUrl,
+      child: CachedNetworkImage(
+//        progressIndicatorBuilder: (context, url, progress) => Center(
+//          child: CircularProgressIndicator(
+//            value: progress.progress,
+//          ),
+//        ),
+        imageUrl: post.author.imageUrl,
+        width: _profilePictureSize,
+        height: _profilePictureSize,
         fit: BoxFit.fill,
-        width: 40,
-        height: 40,
       ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      elevation: 5,
-      margin: EdgeInsets.all(10),
 
+
+//      Image.network(
+//        post.author.imageUrl,
+//        fit: BoxFit.fill,
+//        width: _profilePictureSize,
+//        height: _profilePictureSize,
+//
+//      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(_profilePictureSize!/2),
+      ),
     ),
   );
 
-  Widget _buildUserName()=> Container(
+  Widget _buildUserName(BuildContext context)=> GestureDetector(
+      onTap: (){
+        _openUserProfile(context);
+      },
       child: Text(
         post.author.username,
         textAlign: TextAlign.end,
         overflow: TextOverflow.ellipsis,
         style: const TextStyle(
-            fontWeight: FontWeight.bold,
             fontSize: 20
         ),
       )
@@ -237,6 +253,72 @@ class PostCard extends StatelessWidget {
       PageRouteBuilder(
         opaque: false,
         pageBuilder: (_, __, ___) => UserProfileScreen(
+          user: post.author,
+        ),
+      ),
+    );
+  }
+
+  void _sendComplaintForPost(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: const Text('Жалоба отправлена'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Понятно'),
+            ),
+          ],
+        )
+    );
+  }
+
+  void _sendComplaintForUser(BuildContext context){
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: const Text('Мы рассмотрим Ваш запрос'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Понятно'),
+            ),
+          ],
+        )
+      );
+  }
+}
+
+class _PostButton extends StatelessWidget {
+  final Icon icon;
+  final String label;
+  final VoidCallback? onTap;
+
+  const _PostButton({
+    Key? key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Material(
+        child: InkWell(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            height: 25.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                icon,
+                const SizedBox(width: 4.0),
+              ],
+            ),
+          ),
         ),
       ),
     );

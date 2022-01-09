@@ -45,17 +45,12 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
 
   Future<AddPostScreenState> sendPostToServer(_Send event) async {
     String imageUrl = await uploadImageToFirestore(imageFile);
-    log(imageUrl);
     try {
-
-
       buildParameters(event.text, imageUrl, _authService.getUserEmail()!);
       Response response = await dio.post(
         requestUrl,
         data: jsonEncode(parameters),
       );
-
-      log(response.statusCode.toString());
 
       if(response.statusCode == 200){
         return _ShowSuccess();
@@ -94,9 +89,6 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
 
   }
 
-  AddPostScreenState processChoosingImage(){
-    return _ShowImagePicker();
-  }
 
   AddPostScreenState showScreenWithImage(){
     return _ShowScreenWithImage();
@@ -112,9 +104,6 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
     if(event is _Send){
       yield await sendPostToServer(event);
     }
-    if(event is _ChooseImage){
-      yield processChoosingImage();
-    }
     if(event is _ImageChosen){
       yield showScreenWithImage();
     }
@@ -122,6 +111,5 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
 
   void setSelectImage(File picture) {
     imageFile = picture;
-
   }
 }

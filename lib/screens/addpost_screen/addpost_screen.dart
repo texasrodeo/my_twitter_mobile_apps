@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:my_twitter/components/cancel_cross.dart';
 import 'package:my_twitter/components/footer.dart';
 import 'package:my_twitter/screens/addpost_screen/bloc/addpost_screen_bloc.dart';
 import 'package:my_twitter/screens/home_screen/home_screen.dart';
 import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
+import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 
 class AddPostScreen extends StatefulWidget{
@@ -20,6 +21,9 @@ class _AddPostScreenState extends State<AddPostScreen>{
   Widget viewToReturn = Container();
 
   final textController = TextEditingController();
+
+  bool _validate = false;
+  final int _maxLines=3;
 
   @override
   void dispose() {
@@ -44,16 +48,13 @@ class _AddPostScreenState extends State<AddPostScreen>{
                     );
                   },
                   showScreen: (){
-                    viewToReturn = _buildAddPostScreen();
+                    viewToReturn = _buildAddPostScreen(context);
                   },
                   showScreenWithImage: (){
-                    viewToReturn = _buildAddPostScreenWithImage();
+                    viewToReturn = _buildAddPostScreenWithImage(context);
                   },
                   showSuccess: (){
                     viewToReturn = _buildSuccessScreen();
-                  },
-                  showImagePicker: (){
-                    viewToReturn = _showChoosePictureDialog();
                   },
                   unauthicated: (){
                     viewToReturn = _buildSignInPopUp();
@@ -61,6 +62,9 @@ class _AddPostScreenState extends State<AddPostScreen>{
                   errorLoading: () {
                     viewToReturn = _errorLoadingBuilder();
                   },
+                  uploadingPost: (){
+                    viewToReturn = _buildAddPostScreen(context);
+                  }
                 );
                 return viewToReturn;
               }
@@ -107,31 +111,44 @@ class _AddPostScreenState extends State<AddPostScreen>{
           },
           child: Text('Войти'),
         ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  opaque: false,
+                  pageBuilder: (_, __, ___) => SignUpScreen()
+              ),
+            );
+          },
+          child: Text('Зарегистрироваться'),
+        ),
       ],
     );
   }
 
-  Widget _buildAddPostScreenWithImage(){
+  Widget _buildAddPostScreenWithImage(BuildContext context){
     return Center(
       child:  Column(
         children: [
           _buildTopToolbar(),
           _buildTextField(),
-          _buildImageSpace(),
-          _buildAddPhotoButton()
+          Expanded(child: _buildImageSpace()),
+          _buildAddPhotoButton(context)
 
         ],
       ),
     );
   }
 
-  Widget _buildAddPostScreen(){
+  Widget _buildAddPostScreen(BuildContext context){
     return Center(
       child:  Column(
         children: [
           _buildTopToolbar(),
-          _buildTextField(),
-          _buildAddPhotoButton()
+          Expanded(
+              child: _buildTextField()),
+          _buildAddPhotoButton(context)
 
         ],
       ),
@@ -150,14 +167,23 @@ class _AddPostScreenState extends State<AddPostScreen>{
 
   Widget _buildTopToolbar(){
     return Container(
-      margin: EdgeInsets.all(10),
+      margin: EdgeInsets.symmetric(
+          vertical: 20),
       child: Row(
         children: [
-          CancelCross(),
-          Align(
-            child: _buildPublishButton(),
-            alignment: Alignment.topRight,
-          )
+          Expanded(
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    icon: Icon(Icons.cancel),
+                    onPressed: (){
+                      Navigator.pop(context);
+                    },
+                  )
+              )
+          ),
+         _buildPublishButton(),
+
         ],
       ),
     );
@@ -173,7 +199,8 @@ class _AddPostScreenState extends State<AddPostScreen>{
         if(textController.text.isNotEmpty){
           _addPostScreenBloc.add(AddPostScreenEvent.send(textController.text));
           }
-        },
+        }
+        ,
       child: Text(
         'Опубликовать'
       ),
@@ -182,21 +209,18 @@ class _AddPostScreenState extends State<AddPostScreen>{
 
   Widget _buildTextField(){
     return TextFormField(
+      maxLines: _maxLines,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'Введите свои мысли сюда...',
+        errorText: validateText(textController.text),
       ),
       controller: textController,
-      validator: (text) {
-      if (text!.isEmpty) {
-        return "Заполните обязательное поле!";
-      }
-      return null;
-    },
+      onChanged: (_) => setState(() {}),
     );
   }
 
-  Widget _buildAddPhotoButton(){
+  Widget _buildAddPhotoButton(BuildContext context){
     return Container(
       margin: EdgeInsets.all(10),
       child: Column(
@@ -207,7 +231,7 @@ class _AddPostScreenState extends State<AddPostScreen>{
             maximumSize: const Size(300, 60),
             ),
             onPressed: () {
-              _addPostScreenBloc.add(AddPostScreenEvent.chooseImage());
+              _showChoosePictureDialog(context);
             },
             child: Text(
               'Добавить фото'
@@ -232,12 +256,46 @@ class _AddPostScreenState extends State<AddPostScreen>{
   }
 
 
+
+  void _showChoosePictureDialog(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Добавить фото'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _openGallery();
+              },
+              child: Text('Галерея'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+                _openCamera();
+              },
+              child: Text('Камера'),
+            ),
+            TextButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                child: Text('Назад')
+            )
+          ],
+        )
+    );
+  }
+
   _openGallery() async{
     var picture = await ImagePicker().pickImage(source: ImageSource.gallery);
     File file = File(picture!.path);
     _addPostScreenBloc.setSelectImage(file);
     _addPostScreenBloc.add(AddPostScreenEvent.imageChosen());
   }
+
+
 
   _openCamera() async{
     var picture = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -246,30 +304,12 @@ class _AddPostScreenState extends State<AddPostScreen>{
     _addPostScreenBloc.add(AddPostScreenEvent.imageChosen());
   }
 
-  Widget _showChoosePictureDialog(){
-    return AlertDialog(
-      title: Text('Добавить фото'),
-      actions: [
-        TextButton(
-          onPressed: () {
-            _openGallery();
-          },
-          child: Text('Галерея'),
-        ),
-        TextButton(
-          onPressed: () {
-            _openCamera();
-          },
-          child: Text('Камера'),
-        ),
-        TextButton(
-            onPressed: (){
-              _addPostScreenBloc.add(AddPostScreenEvent.started());
-            },
-            child: Text('Назад')
-        )
-      ],
-    );
+
+  String? validateText(String value) {
+    if (value.isEmpty) {
+      return "Заполните обязательное поле!";
+    }
+    return null;
   }
 
 }
