@@ -264,13 +264,13 @@ class _UserProfileState extends State<UserProfileScreen> {
 
   void _signOut() {
     _userProfileBloc.add(UserProfileEvent.signOut());
-    Timer(
-        Duration(seconds: 2),
-            () {
-          Navigator.of(context).pushReplacementNamed(
-              _userProfileBloc.homeScreenRoute);
-        }
-    );
+//    Timer(
+//        Duration(seconds: 2),
+//            () {
+//          Navigator.of(context).pushReplacementNamed(
+//              _userProfileBloc.homeScreenRoute);
+//        }
+//    );
   }
 
   Future<void> _pullRefresh() async {

@@ -86,8 +86,6 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
                 username: userResult.data['username'],
                 imageUrl: userResult.data['avatarUrl']
             );
-            log("getting user posts");
-            log(user.id);
             final result = await dio.get(
                 getUserPostsUrl,
                 queryParameters: postsParameters,
@@ -95,13 +93,13 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
 
             parseResponse(result);
 
-            log("getting posts count");
+//            log("getting posts count");
             final userPostsCountResult = await dio.get(
                 getPostsCountUrl,
                 queryParameters: userParameters
             );
             postsCount = userPostsCountResult.data;
-            log('posts count : $postsCount');
+//            log('posts count : $postsCount');
             return _ShowProfile(user,postsToShow, postsToShow.toString());
 
         } catch (e) {

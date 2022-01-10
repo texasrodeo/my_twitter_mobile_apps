@@ -27,6 +27,10 @@ class _$SignInScreenEventTearOff {
       password,
     );
   }
+
+  _Loading loading() {
+    return const _Loading();
+  }
 }
 
 /// @nodoc
@@ -38,18 +42,21 @@ mixin _$SignInScreenEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String email, String password) signIn,
+    required TResult Function() loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -57,18 +64,21 @@ mixin _$SignInScreenEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignIn value) signIn,
+    required TResult Function(_Loading value) loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -131,6 +141,7 @@ class _$_Started implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String email, String password) signIn,
+    required TResult Function() loading,
   }) {
     return started();
   }
@@ -140,6 +151,7 @@ class _$_Started implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
   }) {
     return started?.call();
   }
@@ -149,6 +161,7 @@ class _$_Started implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -162,6 +175,7 @@ class _$_Started implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignIn value) signIn,
+    required TResult Function(_Loading value) loading,
   }) {
     return started(this);
   }
@@ -171,6 +185,7 @@ class _$_Started implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
   }) {
     return started?.call(this);
   }
@@ -180,6 +195,7 @@ class _$_Started implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -265,6 +281,7 @@ class _$_SignIn implements _SignIn {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function(String email, String password) signIn,
+    required TResult Function() loading,
   }) {
     return signIn(email, password);
   }
@@ -274,6 +291,7 @@ class _$_SignIn implements _SignIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
   }) {
     return signIn?.call(email, password);
   }
@@ -283,6 +301,7 @@ class _$_SignIn implements _SignIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -296,6 +315,7 @@ class _$_SignIn implements _SignIn {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_SignIn value) signIn,
+    required TResult Function(_Loading value) loading,
   }) {
     return signIn(this);
   }
@@ -305,6 +325,7 @@ class _$_SignIn implements _SignIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
   }) {
     return signIn?.call(this);
   }
@@ -314,6 +335,7 @@ class _$_SignIn implements _SignIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
     required TResult orElse(),
   }) {
     if (signIn != null) {
@@ -333,6 +355,114 @@ abstract class _SignIn implements SignInScreenEvent {
 }
 
 /// @nodoc
+abstract class _$LoadingCopyWith<$Res> {
+  factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
+      __$LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LoadingCopyWithImpl<$Res> extends _$SignInScreenEventCopyWithImpl<$Res>
+    implements _$LoadingCopyWith<$Res> {
+  __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
+      : super(_value, (v) => _then(v as _Loading));
+
+  @override
+  _Loading get _value => super._value as _Loading;
+}
+
+/// @nodoc
+
+class _$_Loading implements _Loading {
+  const _$_Loading();
+
+  @override
+  String toString() {
+    return 'SignInScreenEvent.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String email, String password) signIn,
+    required TResult Function() loading,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String email, String password)? signIn,
+    TResult Function()? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_SignIn value) signIn,
+    required TResult Function(_Loading value) loading,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_SignIn value)? signIn,
+    TResult Function(_Loading value)? loading,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements SignInScreenEvent {
+  const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
 class _$SignInScreenStateTearOff {
   const _$SignInScreenStateTearOff();
 
@@ -348,8 +478,14 @@ class _$SignInScreenStateTearOff {
     return const _ShowSuccess();
   }
 
-  _ErrorLoading errorLoading() {
-    return const _ErrorLoading();
+  _ErrorLoading errorLoading(String errorMessage) {
+    return _ErrorLoading(
+      errorMessage,
+    );
+  }
+
+  _SigningInProgress signingInProgress() {
+    return const _SigningInProgress();
   }
 }
 
@@ -363,7 +499,8 @@ mixin _$SignInScreenState {
     required TResult Function() initial,
     required TResult Function() showScreen,
     required TResult Function() showSuccess,
-    required TResult Function() errorLoading,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -371,7 +508,8 @@ mixin _$SignInScreenState {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -379,7 +517,8 @@ mixin _$SignInScreenState {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -389,6 +528,7 @@ mixin _$SignInScreenState {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowSuccess value) showSuccess,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -397,6 +537,7 @@ mixin _$SignInScreenState {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -405,6 +546,7 @@ mixin _$SignInScreenState {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -468,7 +610,8 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function() showScreen,
     required TResult Function() showSuccess,
-    required TResult Function() errorLoading,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
   }) {
     return initial();
   }
@@ -479,7 +622,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
   }) {
     return initial?.call();
   }
@@ -490,7 +634,8 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -506,6 +651,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowSuccess value) showSuccess,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
   }) {
     return initial(this);
   }
@@ -517,6 +663,7 @@ class _$_Initial implements _Initial {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
   }) {
     return initial?.call(this);
   }
@@ -528,6 +675,7 @@ class _$_Initial implements _Initial {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -585,7 +733,8 @@ class _$_ShowScreen implements _ShowScreen {
     required TResult Function() initial,
     required TResult Function() showScreen,
     required TResult Function() showSuccess,
-    required TResult Function() errorLoading,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
   }) {
     return showScreen();
   }
@@ -596,7 +745,8 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
   }) {
     return showScreen?.call();
   }
@@ -607,7 +757,8 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
     required TResult orElse(),
   }) {
     if (showScreen != null) {
@@ -623,6 +774,7 @@ class _$_ShowScreen implements _ShowScreen {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowSuccess value) showSuccess,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
   }) {
     return showScreen(this);
   }
@@ -634,6 +786,7 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
   }) {
     return showScreen?.call(this);
   }
@@ -645,6 +798,7 @@ class _$_ShowScreen implements _ShowScreen {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
     required TResult orElse(),
   }) {
     if (showScreen != null) {
@@ -702,7 +856,8 @@ class _$_ShowSuccess implements _ShowSuccess {
     required TResult Function() initial,
     required TResult Function() showScreen,
     required TResult Function() showSuccess,
-    required TResult Function() errorLoading,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
   }) {
     return showSuccess();
   }
@@ -713,7 +868,8 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
   }) {
     return showSuccess?.call();
   }
@@ -724,7 +880,8 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
     required TResult orElse(),
   }) {
     if (showSuccess != null) {
@@ -740,6 +897,7 @@ class _$_ShowSuccess implements _ShowSuccess {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowSuccess value) showSuccess,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
   }) {
     return showSuccess(this);
   }
@@ -751,6 +909,7 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
   }) {
     return showSuccess?.call(this);
   }
@@ -762,6 +921,7 @@ class _$_ShowSuccess implements _ShowSuccess {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
     required TResult orElse(),
   }) {
     if (showSuccess != null) {
@@ -780,6 +940,7 @@ abstract class _$ErrorLoadingCopyWith<$Res> {
   factory _$ErrorLoadingCopyWith(
           _ErrorLoading value, $Res Function(_ErrorLoading) then) =
       __$ErrorLoadingCopyWithImpl<$Res>;
+  $Res call({String errorMessage});
 }
 
 /// @nodoc
@@ -792,26 +953,49 @@ class __$ErrorLoadingCopyWithImpl<$Res>
 
   @override
   _ErrorLoading get _value => super._value as _ErrorLoading;
+
+  @override
+  $Res call({
+    Object? errorMessage = freezed,
+  }) {
+    return _then(_ErrorLoading(
+      errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ErrorLoading implements _ErrorLoading {
-  const _$_ErrorLoading();
+  const _$_ErrorLoading(this.errorMessage);
+
+  @override
+  final String errorMessage;
 
   @override
   String toString() {
-    return 'SignInScreenState.errorLoading()';
+    return 'SignInScreenState.errorLoading(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ErrorLoading);
+        (other.runtimeType == runtimeType &&
+            other is _ErrorLoading &&
+            (identical(other.errorMessage, errorMessage) ||
+                other.errorMessage == errorMessage));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, errorMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ErrorLoadingCopyWith<_ErrorLoading> get copyWith =>
+      __$ErrorLoadingCopyWithImpl<_ErrorLoading>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -819,9 +1003,10 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function() initial,
     required TResult Function() showScreen,
     required TResult Function() showSuccess,
-    required TResult Function() errorLoading,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
   }) {
-    return errorLoading();
+    return errorLoading(errorMessage);
   }
 
   @override
@@ -830,9 +1015,10 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
   }) {
-    return errorLoading?.call();
+    return errorLoading?.call(errorMessage);
   }
 
   @override
@@ -841,11 +1027,12 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? initial,
     TResult Function()? showScreen,
     TResult Function()? showSuccess,
-    TResult Function()? errorLoading,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
-      return errorLoading();
+      return errorLoading(errorMessage);
     }
     return orElse();
   }
@@ -857,6 +1044,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function(_ShowScreen value) showScreen,
     required TResult Function(_ShowSuccess value) showSuccess,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
   }) {
     return errorLoading(this);
   }
@@ -868,6 +1056,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
   }) {
     return errorLoading?.call(this);
   }
@@ -879,6 +1068,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_ShowScreen value)? showScreen,
     TResult Function(_ShowSuccess value)? showSuccess,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
@@ -889,5 +1079,133 @@ class _$_ErrorLoading implements _ErrorLoading {
 }
 
 abstract class _ErrorLoading implements SignInScreenState {
-  const factory _ErrorLoading() = _$_ErrorLoading;
+  const factory _ErrorLoading(String errorMessage) = _$_ErrorLoading;
+
+  String get errorMessage;
+  @JsonKey(ignore: true)
+  _$ErrorLoadingCopyWith<_ErrorLoading> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$SigningInProgressCopyWith<$Res> {
+  factory _$SigningInProgressCopyWith(
+          _SigningInProgress value, $Res Function(_SigningInProgress) then) =
+      __$SigningInProgressCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SigningInProgressCopyWithImpl<$Res>
+    extends _$SignInScreenStateCopyWithImpl<$Res>
+    implements _$SigningInProgressCopyWith<$Res> {
+  __$SigningInProgressCopyWithImpl(
+      _SigningInProgress _value, $Res Function(_SigningInProgress) _then)
+      : super(_value, (v) => _then(v as _SigningInProgress));
+
+  @override
+  _SigningInProgress get _value => super._value as _SigningInProgress;
+}
+
+/// @nodoc
+
+class _$_SigningInProgress implements _SigningInProgress {
+  const _$_SigningInProgress();
+
+  @override
+  String toString() {
+    return 'SignInScreenState.signingInProgress()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SigningInProgress);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() showScreen,
+    required TResult Function() showSuccess,
+    required TResult Function(String errorMessage) errorLoading,
+    required TResult Function() signingInProgress,
+  }) {
+    return signingInProgress();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? showScreen,
+    TResult Function()? showSuccess,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
+  }) {
+    return signingInProgress?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? showScreen,
+    TResult Function()? showSuccess,
+    TResult Function(String errorMessage)? errorLoading,
+    TResult Function()? signingInProgress,
+    required TResult orElse(),
+  }) {
+    if (signingInProgress != null) {
+      return signingInProgress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ShowScreen value) showScreen,
+    required TResult Function(_ShowSuccess value) showSuccess,
+    required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_SigningInProgress value) signingInProgress,
+  }) {
+    return signingInProgress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowScreen value)? showScreen,
+    TResult Function(_ShowSuccess value)? showSuccess,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
+  }) {
+    return signingInProgress?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowScreen value)? showScreen,
+    TResult Function(_ShowSuccess value)? showSuccess,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_SigningInProgress value)? signingInProgress,
+    required TResult orElse(),
+  }) {
+    if (signingInProgress != null) {
+      return signingInProgress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SigningInProgress implements SignInScreenState {
+  const factory _SigningInProgress() = _$_SigningInProgress;
 }

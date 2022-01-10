@@ -5,5 +5,6 @@ class SignInScreenState with _$SignInScreenState{
   const factory SignInScreenState.initial() = _Initial;
   const factory SignInScreenState.showScreen() = _ShowScreen;
   const factory SignInScreenState.showSuccess() = _ShowSuccess;
-  const factory SignInScreenState.errorLoading() = _ErrorLoading;
+  const factory SignInScreenState.errorLoading(String errorMessage) = _ErrorLoading;
+  const factory SignInScreenState.signingInProgress() = _SigningInProgress;
 }

@@ -34,6 +34,10 @@ class _$AddPostScreenEventTearOff {
   _ImageChosen imageChosen() {
     return const _ImageChosen();
   }
+
+  _SetLoading setLoading() {
+    return const _SetLoading();
+  }
 }
 
 /// @nodoc
@@ -47,6 +51,7 @@ mixin _$AddPostScreenEvent {
     required TResult Function(String text) send,
     required TResult Function() chooseImage,
     required TResult Function() imageChosen,
+    required TResult Function() setLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +60,7 @@ mixin _$AddPostScreenEvent {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +69,7 @@ mixin _$AddPostScreenEvent {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -72,6 +79,7 @@ mixin _$AddPostScreenEvent {
     required TResult Function(_Send value) send,
     required TResult Function(_ChooseImage value) chooseImage,
     required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -80,6 +88,7 @@ mixin _$AddPostScreenEvent {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -88,6 +97,7 @@ mixin _$AddPostScreenEvent {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -153,6 +163,7 @@ class _$_Started implements _Started {
     required TResult Function(String text) send,
     required TResult Function() chooseImage,
     required TResult Function() imageChosen,
+    required TResult Function() setLoading,
   }) {
     return started();
   }
@@ -164,6 +175,7 @@ class _$_Started implements _Started {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
   }) {
     return started?.call();
   }
@@ -175,6 +187,7 @@ class _$_Started implements _Started {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -190,6 +203,7 @@ class _$_Started implements _Started {
     required TResult Function(_Send value) send,
     required TResult Function(_ChooseImage value) chooseImage,
     required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
   }) {
     return started(this);
   }
@@ -201,6 +215,7 @@ class _$_Started implements _Started {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
   }) {
     return started?.call(this);
   }
@@ -212,6 +227,7 @@ class _$_Started implements _Started {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -290,6 +306,7 @@ class _$_Send implements _Send {
     required TResult Function(String text) send,
     required TResult Function() chooseImage,
     required TResult Function() imageChosen,
+    required TResult Function() setLoading,
   }) {
     return send(text);
   }
@@ -301,6 +318,7 @@ class _$_Send implements _Send {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
   }) {
     return send?.call(text);
   }
@@ -312,6 +330,7 @@ class _$_Send implements _Send {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
     required TResult orElse(),
   }) {
     if (send != null) {
@@ -327,6 +346,7 @@ class _$_Send implements _Send {
     required TResult Function(_Send value) send,
     required TResult Function(_ChooseImage value) chooseImage,
     required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
   }) {
     return send(this);
   }
@@ -338,6 +358,7 @@ class _$_Send implements _Send {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
   }) {
     return send?.call(this);
   }
@@ -349,6 +370,7 @@ class _$_Send implements _Send {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
     required TResult orElse(),
   }) {
     if (send != null) {
@@ -411,6 +433,7 @@ class _$_ChooseImage implements _ChooseImage {
     required TResult Function(String text) send,
     required TResult Function() chooseImage,
     required TResult Function() imageChosen,
+    required TResult Function() setLoading,
   }) {
     return chooseImage();
   }
@@ -422,6 +445,7 @@ class _$_ChooseImage implements _ChooseImage {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
   }) {
     return chooseImage?.call();
   }
@@ -433,6 +457,7 @@ class _$_ChooseImage implements _ChooseImage {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
     required TResult orElse(),
   }) {
     if (chooseImage != null) {
@@ -448,6 +473,7 @@ class _$_ChooseImage implements _ChooseImage {
     required TResult Function(_Send value) send,
     required TResult Function(_ChooseImage value) chooseImage,
     required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
   }) {
     return chooseImage(this);
   }
@@ -459,6 +485,7 @@ class _$_ChooseImage implements _ChooseImage {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
   }) {
     return chooseImage?.call(this);
   }
@@ -470,6 +497,7 @@ class _$_ChooseImage implements _ChooseImage {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
     required TResult orElse(),
   }) {
     if (chooseImage != null) {
@@ -528,6 +556,7 @@ class _$_ImageChosen implements _ImageChosen {
     required TResult Function(String text) send,
     required TResult Function() chooseImage,
     required TResult Function() imageChosen,
+    required TResult Function() setLoading,
   }) {
     return imageChosen();
   }
@@ -539,6 +568,7 @@ class _$_ImageChosen implements _ImageChosen {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
   }) {
     return imageChosen?.call();
   }
@@ -550,6 +580,7 @@ class _$_ImageChosen implements _ImageChosen {
     TResult Function(String text)? send,
     TResult Function()? chooseImage,
     TResult Function()? imageChosen,
+    TResult Function()? setLoading,
     required TResult orElse(),
   }) {
     if (imageChosen != null) {
@@ -565,6 +596,7 @@ class _$_ImageChosen implements _ImageChosen {
     required TResult Function(_Send value) send,
     required TResult Function(_ChooseImage value) chooseImage,
     required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
   }) {
     return imageChosen(this);
   }
@@ -576,6 +608,7 @@ class _$_ImageChosen implements _ImageChosen {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
   }) {
     return imageChosen?.call(this);
   }
@@ -587,6 +620,7 @@ class _$_ImageChosen implements _ImageChosen {
     TResult Function(_Send value)? send,
     TResult Function(_ChooseImage value)? chooseImage,
     TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
     required TResult orElse(),
   }) {
     if (imageChosen != null) {
@@ -598,6 +632,129 @@ class _$_ImageChosen implements _ImageChosen {
 
 abstract class _ImageChosen implements AddPostScreenEvent {
   const factory _ImageChosen() = _$_ImageChosen;
+}
+
+/// @nodoc
+abstract class _$SetLoadingCopyWith<$Res> {
+  factory _$SetLoadingCopyWith(
+          _SetLoading value, $Res Function(_SetLoading) then) =
+      __$SetLoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$SetLoadingCopyWithImpl<$Res>
+    extends _$AddPostScreenEventCopyWithImpl<$Res>
+    implements _$SetLoadingCopyWith<$Res> {
+  __$SetLoadingCopyWithImpl(
+      _SetLoading _value, $Res Function(_SetLoading) _then)
+      : super(_value, (v) => _then(v as _SetLoading));
+
+  @override
+  _SetLoading get _value => super._value as _SetLoading;
+}
+
+/// @nodoc
+
+class _$_SetLoading implements _SetLoading {
+  const _$_SetLoading();
+
+  @override
+  String toString() {
+    return 'AddPostScreenEvent.setLoading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _SetLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(String text) send,
+    required TResult Function() chooseImage,
+    required TResult Function() imageChosen,
+    required TResult Function() setLoading,
+  }) {
+    return setLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String text)? send,
+    TResult Function()? chooseImage,
+    TResult Function()? imageChosen,
+    TResult Function()? setLoading,
+  }) {
+    return setLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(String text)? send,
+    TResult Function()? chooseImage,
+    TResult Function()? imageChosen,
+    TResult Function()? setLoading,
+    required TResult orElse(),
+  }) {
+    if (setLoading != null) {
+      return setLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Send value) send,
+    required TResult Function(_ChooseImage value) chooseImage,
+    required TResult Function(_ImageChosen value) imageChosen,
+    required TResult Function(_SetLoading value) setLoading,
+  }) {
+    return setLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Send value)? send,
+    TResult Function(_ChooseImage value)? chooseImage,
+    TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
+  }) {
+    return setLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Send value)? send,
+    TResult Function(_ChooseImage value)? chooseImage,
+    TResult Function(_ImageChosen value)? imageChosen,
+    TResult Function(_SetLoading value)? setLoading,
+    required TResult orElse(),
+  }) {
+    if (setLoading != null) {
+      return setLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetLoading implements AddPostScreenEvent {
+  const factory _SetLoading() = _$_SetLoading;
 }
 
 /// @nodoc

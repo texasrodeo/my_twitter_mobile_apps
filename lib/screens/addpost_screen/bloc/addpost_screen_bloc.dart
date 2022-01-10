@@ -25,12 +25,6 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
 
   String requestUrl = '${Constants.apiBaseUrl}posts/add';
 
-//  User mockuser = User(
-//    id: "1",
-//    username: "testUser1",
-//    imageUrl: ""
-//  )
-
   late String authorId;
 
   late File imageFile;
@@ -58,9 +52,6 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
       else{
         return _ShowScreen();
       }
-
-
-
     } catch (e) {
       print(e);
       return _ErrorLoading();
@@ -102,10 +93,14 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
       yield await processLoadEvent();
     }
     if(event is _Send){
+
       yield await sendPostToServer(event);
     }
     if(event is _ImageChosen){
       yield showScreenWithImage();
+    }
+    if(event is _SetLoading){
+      yield _UploadingPost();
     }
   }
 
