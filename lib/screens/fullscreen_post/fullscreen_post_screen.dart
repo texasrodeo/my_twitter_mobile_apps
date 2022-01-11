@@ -71,25 +71,27 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           PostCard(post: post, index: 1),
-          Expanded(child: _buildComments(_fullscreenPostBloc.postComments)),
-          Expanded(
-            child: _buildAddCommentField(),
-          )
+          Expanded(child:
+            _buildComments(_fullscreenPostBloc.postComments),
+          ),
+//          Expanded(
+//            child: _buildAddCommentField(),
+//          )
         ],
       ),
     );
   }
 
 
-  Widget _buildComments(List<Comment> postComments) => Container(
-      child: LazyLoadScrollView(
+  Widget _buildComments(List<Comment> postComments) =>
+      LazyLoadScrollView(
         scrollOffset: (MediaQuery.of(context).size.height * 0.7).toInt(),
         child: RefreshIndicator(
           onRefresh: _pullRefresh,
           child: ListView.builder(
             padding: EdgeInsets.all(5),
-            shrinkWrap: true,
-            physics: AlwaysScrollableScrollPhysics(),
+//            shrinkWrap: true,
+//            physics: AlwaysScrollableScrollPhysics(),
             itemCount: postComments.length,
             itemBuilder: (BuildContext context, int index) {
               if (index != postComments.length) {
@@ -108,17 +110,18 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
         onEndOfPage: () {
           _fullscreenPostBloc.add(FullscreenPostEvent.loadMoreComments());
         },
-      ));
+      );
 
   Widget _buildAddCommentField() {
     return Container(
 //      padding: EdgeInsets.only(bottom: 5),
 //      width: 300,
-//      height: 50,
+//      height: 20,
       child: Row(
         children: [
           Expanded(
-            child: TextField(
+            child:
+            TextField(
 
                 controller: textController,
                 decoration: InputDecoration(

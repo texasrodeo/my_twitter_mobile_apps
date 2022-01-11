@@ -24,7 +24,7 @@ class LoadingBar extends StatelessWidget{
                 child: new Center(child: new CircularProgressIndicator())),
             Expanded(
                 child: Text(
-                  'Подождите, пост публикуется',
+                  text,
                   style: TextStyle(
                     fontSize: 16,
                   ),

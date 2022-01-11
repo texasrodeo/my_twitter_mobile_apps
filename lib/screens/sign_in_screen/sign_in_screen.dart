@@ -108,6 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (validateForm()) {
+                      _signInScreenBloc.add(SignInScreenEvent.loading());
                       _signInScreenBloc.add(SignInScreenEvent.signIn(
                           _emailController.text, _passwordController.text));
                     }
@@ -171,6 +172,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (validateForm()) {
+                      _signInScreenBloc.add(SignInScreenEvent.loading());
                       _signInScreenBloc.add(SignInScreenEvent.signIn(
                           _emailController.text, _passwordController.text));
                     }
@@ -191,7 +193,6 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   Widget _buildErrorMessage(String message) {
-    log(message);
     return Container(
       margin: EdgeInsets.only(top: 10),
         child: Text(

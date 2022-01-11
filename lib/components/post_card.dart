@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter/models/post.dart';
@@ -46,7 +48,7 @@ class PostCard extends StatelessWidget {
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: _buildPostStats(),
+              child: _buildPostStats(context),
             ),
           ],
         )
@@ -150,7 +152,7 @@ class PostCard extends StatelessWidget {
 
 
 
-  Widget _buildPostStats() =>  Container(
+  Widget _buildPostStats(BuildContext context) =>  Container(
     margin: EdgeInsets.only(
       bottom: 6.0
     ),
@@ -162,23 +164,25 @@ class PostCard extends StatelessWidget {
             color: post.likeStatus == LikeStatus.inactive ? Colors.black : Colors.redAccent,
             size: 30,
           ),
-          label: 'Like',
-          onTap: () => onLikeTap,
+          label: post.likes.length.toString(),
+          onTap: () => {
+            onLikeTap!()
+          },
         ),
         _PostButton(
           icon: Icon(
               Icons.comment,
               size: 30
           ),
-          label: 'Comment',
-          onTap: () => print('Comment'),
+          label: '',
+          onTap: () => _openFullScreen(context),
         ),
         _PostButton(
           icon: Icon(
             Icons.share,
             size: 30,
           ),
-          label: 'Share',
+          label: '',
           onTap: () => print('Share'),
         )
       ],
@@ -195,25 +199,11 @@ class PostCard extends StatelessWidget {
       semanticContainer: false,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: CachedNetworkImage(
-//        progressIndicatorBuilder: (context, url, progress) => Center(
-//          child: CircularProgressIndicator(
-//            value: progress.progress,
-//          ),
-//        ),
         imageUrl: post.author.imageUrl,
         width: _profilePictureSize,
         height: _profilePictureSize,
         fit: BoxFit.fill,
       ),
-
-
-//      Image.network(
-//        post.author.imageUrl,
-//        fit: BoxFit.fill,
-//        width: _profilePictureSize,
-//        height: _profilePictureSize,
-//
-//      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(_profilePictureSize!/2),
       ),
@@ -316,6 +306,17 @@ class _PostButton extends StatelessWidget {
               children: [
                 icon,
                 const SizedBox(width: 4.0),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 3
+                  ),
+                  child: Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 20
+                    ),
+                  ),
+                )
               ],
             ),
           ),

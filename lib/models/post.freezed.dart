@@ -22,13 +22,15 @@ class _$PostTearOff {
       required User author,
       required String text,
       required String imageUrl,
-      LikeStatus? likeStatus}) {
+      LikeStatus? likeStatus,
+      required List<Like> likes}) {
     return _Post(
       id: id,
       author: author,
       text: text,
       imageUrl: imageUrl,
       likeStatus: likeStatus,
+      likes: likes,
     );
   }
 }
@@ -43,6 +45,7 @@ mixin _$Post {
   String get text => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
   LikeStatus? get likeStatus => throw _privateConstructorUsedError;
+  List<Like> get likes => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostCopyWith<Post> get copyWith => throw _privateConstructorUsedError;
@@ -57,7 +60,8 @@ abstract class $PostCopyWith<$Res> {
       User author,
       String text,
       String imageUrl,
-      LikeStatus? likeStatus});
+      LikeStatus? likeStatus,
+      List<Like> likes});
 
   $UserCopyWith<$Res> get author;
 }
@@ -77,6 +81,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
     Object? text = freezed,
     Object? imageUrl = freezed,
     Object? likeStatus = freezed,
+    Object? likes = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -99,6 +104,10 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
           ? _value.likeStatus
           : likeStatus // ignore: cast_nullable_to_non_nullable
               as LikeStatus?,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<Like>,
     ));
   }
 
@@ -120,7 +129,8 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       User author,
       String text,
       String imageUrl,
-      LikeStatus? likeStatus});
+      LikeStatus? likeStatus,
+      List<Like> likes});
 
   @override
   $UserCopyWith<$Res> get author;
@@ -142,6 +152,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? text = freezed,
     Object? imageUrl = freezed,
     Object? likeStatus = freezed,
+    Object? likes = freezed,
   }) {
     return _then(_Post(
       id: id == freezed
@@ -164,6 +175,10 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           ? _value.likeStatus
           : likeStatus // ignore: cast_nullable_to_non_nullable
               as LikeStatus?,
+      likes: likes == freezed
+          ? _value.likes
+          : likes // ignore: cast_nullable_to_non_nullable
+              as List<Like>,
     ));
   }
 }
@@ -176,7 +191,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       required this.author,
       required this.text,
       required this.imageUrl,
-      this.likeStatus});
+      this.likeStatus,
+      required this.likes});
 
   @override
   final String id;
@@ -188,10 +204,12 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   final String imageUrl;
   @override
   final LikeStatus? likeStatus;
+  @override
+  final List<Like> likes;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Post(id: $id, author: $author, text: $text, imageUrl: $imageUrl, likeStatus: $likeStatus)';
+    return 'Post(id: $id, author: $author, text: $text, imageUrl: $imageUrl, likeStatus: $likeStatus, likes: $likes)';
   }
 
   @override
@@ -203,7 +221,8 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
       ..add(DiagnosticsProperty('author', author))
       ..add(DiagnosticsProperty('text', text))
       ..add(DiagnosticsProperty('imageUrl', imageUrl))
-      ..add(DiagnosticsProperty('likeStatus', likeStatus));
+      ..add(DiagnosticsProperty('likeStatus', likeStatus))
+      ..add(DiagnosticsProperty('likes', likes));
   }
 
   @override
@@ -217,12 +236,13 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
             (identical(other.likeStatus, likeStatus) ||
-                other.likeStatus == likeStatus));
+                other.likeStatus == likeStatus) &&
+            const DeepCollectionEquality().equals(other.likes, likes));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, author, text, imageUrl, likeStatus);
+  int get hashCode => Object.hash(runtimeType, id, author, text, imageUrl,
+      likeStatus, const DeepCollectionEquality().hash(likes));
 
   @JsonKey(ignore: true)
   @override
@@ -236,7 +256,8 @@ abstract class _Post implements Post {
       required User author,
       required String text,
       required String imageUrl,
-      LikeStatus? likeStatus}) = _$_Post;
+      LikeStatus? likeStatus,
+      required List<Like> likes}) = _$_Post;
 
   @override
   String get id;
@@ -248,6 +269,8 @@ abstract class _Post implements Post {
   String get imageUrl;
   @override
   LikeStatus? get likeStatus;
+  @override
+  List<Like> get likes;
   @override
   @JsonKey(ignore: true)
   _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;

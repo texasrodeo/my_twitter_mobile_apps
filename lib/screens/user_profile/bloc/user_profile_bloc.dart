@@ -1,4 +1,5 @@
 
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:logger/logger.dart';
@@ -6,11 +7,13 @@ import 'package:logger/logger.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:my_twitter/models/like.dart';
 import 'package:my_twitter/models/main_user_details.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
 import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/services/auth/auth_service.dart';
+import 'package:my_twitter/utils/functions.dart';
 
 part 'user_profile_state.dart';
 part 'user_profile_event.dart';
@@ -40,6 +43,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
     String getUserPostsUrl = '${Constants.apiBaseUrl}posts/user';
     String getPostsCountUrl = '${Constants.apiBaseUrl}posts/user/count';
     String getUserUrl = '${Constants.apiBaseUrl}users/user';
+    String likeUrl = '${Constants.apiBaseUrl}posts/like';
 
     Map<String, dynamic> get postsParameters => {
         'username': userDetails.email,
@@ -50,6 +54,15 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
     Map<String, dynamic> get userParameters => {
         'username': userDetails.email,
     };
+
+    var likeParameters = Map<String, dynamic>();
+
+    void buildParameters(String postId, String userId, String status){
+        likeParameters['postId'] = postId;
+        likeParameters['userId'] = userId;
+        likeParameters['likeStatus'] = status;
+    }
+
 
     Future<UserProfileState> processLoadEvent(_Started event) async {
         bool isSignedIn = await _authService.isSignedIn();
@@ -113,7 +126,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
     }
 
 
-    void parseResponse(Response result) {
+    void parseResponse(Response result) async {
         final postsList = result.data;
 
         for (var post in postsList) {
@@ -123,20 +136,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
                 continue;
             }
 
-            postsToShow.add(
-                Post(
-                    text: post['text'],
-                    imageUrl: post['imageUrl'],
-                    id: post['id'],
-                    author: User(
-                        id: post['author']['id'],
-                        username: post['author']['username'],
-                        imageUrl: post['author']['avatarUrl'],
-                        phone: post['author']['phone']
-                    ),
-                    likeStatus: LikeStatus.inactive
-                ),
-            );
+            postsToShow.add(await buildPost(post));
         }
     }
 
@@ -145,7 +145,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
         return _Unauthicated();
     }
 
-    UserProfileState changeLikeStatus(_ChangeLikeStatus event) {
+    Future<UserProfileState> changeLikeStatus(_ChangeLikeStatus event) async {
         LikeStatus currentLikeStatus = event.currentLikeStatus;
         LikeStatus newLikeStatus;
 
@@ -155,16 +155,82 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
             newLikeStatus = LikeStatus.inactive;
         }
 
-        String postId = event.postId;
-        int indexToReplace = postsToShow.indexWhere((element) => element.id == postId);
+        Response response;
 
-        Post newPost = postsToShow[indexToReplace].copyWith(
-            likeStatus: newLikeStatus,
+
+        buildParameters(event.postId, _authService.getUserEmail()!, SharedFunctions.convertStatusToString(newLikeStatus));
+        response = await dio.post(
+            likeUrl,
+            data: jsonEncode(likeParameters),
         );
 
-        postsToShow[indexToReplace] = newPost;
 
+
+
+        if(response.statusCode == 200) {
+            log('success');
+            String postId = event.postId;
+            int indexToReplace = postsToShow.indexWhere((element) =>
+            element.id == postId);
+
+            Post newPost = postsToShow[indexToReplace].copyWith(
+                likeStatus: newLikeStatus,
+            );
+
+            postsToShow[indexToReplace] = newPost;
+        }
         return _ShowProfile(user, postsToShow, postsToShow.toString());
+
+    }
+
+
+    Future<Post> buildPost(post) async {
+        List<Like> likes = [];
+        for(var l in post['likes']){
+            Like like = Like(
+                userId: l['userId']
+            );
+            likes.add(like);
+        }
+        LikeStatus likeStatus;
+        if(await _authService.isSignedIn()){
+            if(isPostLikedByUser(likes, _authService.getUserEmail()!)){
+                likeStatus = LikeStatus.active;
+            }
+            else{
+                likeStatus = LikeStatus.inactive;
+            }
+        }
+        else{
+            likeStatus = LikeStatus.inactive;
+        }
+
+
+        return Post(
+            text: post['text'],
+            imageUrl: post['imageUrl'],
+            id: post['id'],
+            author: User(
+                id: post['author']['id'],
+                username: post['author']['username'],
+                imageUrl: post['author']['avatarUrl'],
+                phone: post['author']['phone']
+            ),
+            likes: likes,
+            likeStatus: likeStatus
+        );
+    }
+
+    bool isPostLikedByUser(List<Like> likes, String userId){
+        bool res = false;
+        for(var l in likes){
+            if(l.userId == userId){
+                res = true;
+                break;
+            }
+        }
+        return res;
+
     }
 
     @override
@@ -176,7 +242,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
         }
 
         if (event is _ChangeLikeStatus) {
-            yield changeLikeStatus(event);
+            yield await changeLikeStatus(event);
         }
 
         if (event is _LoadMore) {

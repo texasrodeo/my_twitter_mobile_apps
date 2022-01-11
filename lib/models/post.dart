@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:my_twitter/models/user.dart';
 
+import 'like.dart';
+
 part 'post.freezed.dart';
 
 enum LikeStatus{
@@ -17,5 +19,7 @@ abstract class Post with _$Post {
     required String text,
     required String imageUrl,
     LikeStatus? likeStatus,
+    required List<Like> likes
   }) = _Post;
+
 }

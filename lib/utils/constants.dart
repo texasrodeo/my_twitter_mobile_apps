@@ -13,10 +13,14 @@ class FirebaseErrorCodes{
   static const String wrong_password = 'wrong-password';
   static const String too_many_requests = 'too-many-requests';
 
+  static const String email_already_in_use = 'email-already-in-use';
+
 }
 
 class ErrorMessages{
   static const String user_not_found_message = 'Ошибка: пользователь не найден';
   static const String wrong_password_message = 'Ошибка: неверный пароль';
   static const String too_many_requests_message = 'Ошибка: слишком много запросов, попробуйте позже';
+
+  static const String email_already_in_usemessage = 'Ошибка: email уже занят';
 }

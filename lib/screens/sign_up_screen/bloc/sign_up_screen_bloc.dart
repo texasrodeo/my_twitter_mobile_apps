@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -44,24 +45,36 @@ class SignUpScreenBloc extends Bloc<SignUpScreenEvent, SignUpScreenState> {
   }
 
   Future<SignUpScreenState> processSignIn(String email, String password, String username) async {
-    User? user = await _authService.signUp(email, password);
-    if(user!=null){
+    try{
+      User? user = await _authService.signUp(email, password);
+      if(user!=null){
         buildParameters(email, null, username, null);
         Response response = await dio.post(
           addUserUrl,
           data: jsonEncode(parameters),
         );
 
-
-
+      }
+      if(await _authService.isSignedIn()){
+        return _ShowSuccess();
+      }
+      else{
+        return _ShowScreen();
+      }
     }
-    if(await _authService.isSignedIn()){
-      return _ShowSuccess();
+    on FirebaseException catch(e){
+      log(e.code);
+      return _ErrorLoading(getMessageToTheErrorCode(e.code));
     }
-    else{
-      return _ShowScreen();
-    }
+  }
 
+  String getMessageToTheErrorCode(String code){
+    switch (code){
+      case FirebaseErrorCodes.email_already_in_use:
+        return ErrorMessages.email_already_in_usemessage;
+      default:
+        return '';
+    }
   }
 
 
@@ -74,6 +87,10 @@ class SignUpScreenBloc extends Bloc<SignUpScreenEvent, SignUpScreenState> {
     }
     if(event is _SignUp){
       yield await processSignIn(event.email, event.password, event.username);
+    }
+    if(event is _Loading){
+      log('ddd');
+      yield _SigningUpInProgress();
     }
   }
 }

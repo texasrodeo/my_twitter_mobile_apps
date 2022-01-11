@@ -6,5 +6,6 @@ class SignUpScreenState with _$SignUpScreenState{
   const factory SignUpScreenState.initial() = _Initial;
   const factory SignUpScreenState.showScreen() = _ShowScreen;
   const factory SignUpScreenState.showSuccess() = _ShowSuccess;
-  const factory SignUpScreenState.errorLoading() = _ErrorLoading;
+  const factory SignUpScreenState.errorLoading(String errorCode) = _ErrorLoading;
+  const factory SignUpScreenState.signingUpInProgress() = _SigningUpInProgress;
 }

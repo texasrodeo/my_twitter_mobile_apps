@@ -30,7 +30,7 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   late Post postToShow;
   late List<Comment> postComments = [];
 
-  int page = 1, perPage = 3;
+  int page = 1, perPage = 4;
   String requestUrl = '${Constants.apiBaseUrl}comments/post';
   String addCommentUrl = '${Constants.apiBaseUrl}comments/add';
 
@@ -39,9 +39,9 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   var addCommentparams = Map<String, dynamic>();
 
   void buildAddCommentParams(String postId, String text, String authorId){
-    parameters['postId'] = postId;
-    parameters['text'] = text;
-    parameters['authorId'] = authorId;
+    addCommentparams['postId'] = postId;
+    addCommentparams['text'] = text;
+    addCommentparams['authorId'] = authorId;
   }
 
   void buildParameters(String postId, String page, String perPage){
@@ -53,6 +53,7 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   Future<FullscreenPostState> processLoadEvent(_Started event) async {
     postToShow = event.post;
     buildParameters(event.post.id, this.page.toString(), this.perPage.toString());
+    log(parameters.toString());
     final result = await dio.get(
       requestUrl,
       queryParameters: parameters,
@@ -64,6 +65,9 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   }
 
   Future<FullscreenPostState> loadMoreComments() async {
+
+    buildParameters(postToShow.id, this.page.toString(), this.perPage.toString());
+    log(parameters.toString());
     final result = await dio.get(
       requestUrl,
       queryParameters: parameters,
@@ -75,9 +79,10 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
   }
 
   void parseResponse(Response result) {
+    log(result.toString());
     final commentsList = result.data;
 
-    log(commentsList);
+    log(commentsList.toString());
     for (var comment in commentsList) {
       var contain = postComments.where((element) =>
           element.id == comment['id']);
@@ -111,6 +116,7 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
         );
       }
     }
+    log(postComments.length.toString());
   }
 
   FullscreenPostState changeLikeStatus() {
@@ -148,7 +154,7 @@ class FullscreenPostBloc extends Bloc<FullscreenPostEvent, FullscreenPostState>{
         buildAddCommentParams(postToShow.id, comment, _authService.getUserEmail()!);
         Response response = await dio.post(
           addCommentUrl,
-          data: jsonEncode(parameters),
+          data: jsonEncode(addCommentparams),
         );
 
 

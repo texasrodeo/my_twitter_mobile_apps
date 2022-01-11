@@ -73,5 +73,8 @@ class SignInScreenBloc extends Bloc<SignInScreenEvent, SignInScreenState>{
     if(event is _SignIn){
       yield await processSignIn(event.email, event.password);
     }
+    if(event is _Loading){
+      yield _SigningInProgress();
+    }
   }
 }

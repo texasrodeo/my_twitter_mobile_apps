@@ -6,6 +6,8 @@ import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:my_twitter/components/footer.dart';
 import 'package:my_twitter/components/post_card.dart';
 import 'package:my_twitter/models/post.dart';
+import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
+import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
 
 import 'bloc/home_screen_bloc.dart';
 
@@ -48,6 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
               errorLoading: () {
                 viewToReturn = _errorLoadingBuilder();
               },
+              unauthicated: (){
+                viewToReturn = _buildSignInPopUp();
+              }
             );
 
             return viewToReturn;
@@ -102,6 +107,40 @@ class _HomeScreenState extends State<HomeScreen> {
           Icons.replay_outlined,
         ),
       ),
+    );
+  }
+
+  Widget _buildSignInPopUp() {
+    return AlertDialog(
+      title: Text('Вы не вошли в систему'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            _homeScreenBloc.add(HomeScreenEvent.started());
+          },
+          child: Text('Понятно'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  opaque: false, pageBuilder: (_, __, ___) => SignInScreen()),
+            );
+          },
+          child: Text('Войти'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  opaque: false, pageBuilder: (_, __, ___) => SignUpScreen()),
+            );
+          },
+          child: Text('Зарегистрироваться'),
+        ),
+      ],
     );
   }
 
