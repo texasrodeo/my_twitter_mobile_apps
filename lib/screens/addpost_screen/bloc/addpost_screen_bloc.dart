@@ -27,7 +27,7 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
 
   late String authorId;
 
-  late File imageFile;
+  late File? imageFile;
 
   var parameters = Map<String, dynamic>();
 
@@ -38,7 +38,7 @@ class AddPostScreenBloc extends Bloc<AddPostScreenEvent, AddPostScreenState>{
   }
 
   Future<AddPostScreenState> sendPostToServer(_Send event) async {
-    String imageUrl = await uploadImageToFirestore(imageFile);
+    String imageUrl = await uploadImageToFirestore(imageFile!);
     try {
       buildParameters(event.text, imageUrl, _authService.getUserEmail()!);
       Response response = await dio.post(

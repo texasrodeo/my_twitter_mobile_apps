@@ -25,6 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget viewToReturn = Container();
 
   @override
+  void dispose() {
+    _homeScreenBloc.close();
+    super.dispose();
+  }
+
+  @override
   void didChangeDependencies() {
     _homeScreenBloc = BlocProvider.of<HomeScreenBloc>(context);
 
@@ -40,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             state.when(
               initial: () {
                 _homeScreenBloc.add(HomeScreenEvent.started());
+                log('initial');
                 viewToReturn = const Center(
                   child: CircularProgressIndicator(),
                 );
@@ -80,6 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 index: index,
                 onLikeTap: () {
                   _homeScreenBloc.add(HomeScreenEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
+
                 },
               );
             }

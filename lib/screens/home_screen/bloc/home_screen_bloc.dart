@@ -111,6 +111,15 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
         );
 
         postsToShow[indexToReplace] = newPost;
+        Like like = new Like(
+          userId: _authService.getUserEmail()!
+        );
+        if(newLikeStatus == LikeStatus.active){
+          postsToShow[indexToReplace].likes.add(like);
+        }
+        else{
+          postsToShow[indexToReplace].likes.remove(like);
+        }
       }
       return _ShowPosts(postsToShow, postsToShow.toString());;
 

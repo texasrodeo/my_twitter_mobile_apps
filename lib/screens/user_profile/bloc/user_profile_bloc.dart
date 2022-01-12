@@ -178,11 +178,22 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
             );
 
             postsToShow[indexToReplace] = newPost;
+            Like like = new Like(
+                userId: _authService.getUserEmail()!
+            );
+            if(newLikeStatus == LikeStatus.active){
+                postsToShow[indexToReplace].likes.add(like);
+            }
+            else{
+                postsToShow[indexToReplace].likes.remove(like);
+            }
         }
+
+
+
         return _ShowProfile(user, postsToShow, postsToShow.toString());
 
     }
-
 
     Future<Post> buildPost(post) async {
         List<Like> likes = [];

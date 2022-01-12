@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,9 @@ import 'package:my_twitter/components/post_card.dart';
 import 'package:my_twitter/models/comment.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/screens/fullscreen_post/bloc/fullscreen_post_bloc.dart';
+import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
+import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
+import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
 
 class FullScreenPostScreen extends StatefulWidget {
@@ -44,6 +49,7 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
             _fullscreenPostBloc = BlocProvider.of<FullscreenPostBloc>(context);
             Widget viewToReturn = Container();
             state.when(initial: () {
+              log('initial fullscreen');
               textController.text = "";
               _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post));
               viewToReturn = Center(
@@ -55,7 +61,10 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
               viewToReturn = Center(
                 child: CircularProgressIndicator(),
               );
-            });
+            }, unauthicated: () {
+              viewToReturn = _buildSignInPopUp();
+            }
+            );
             return viewToReturn;
           },
         ),
@@ -70,13 +79,22 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          PostCard(post: post, index: 1),
+          PostCard(
+              post: post,
+              index: 1,
+            onLikeTap: () {
+              _fullscreenPostBloc.add(FullscreenPostEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
+              BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.changeLikeStatus(
+                  post.likeStatus ?? LikeStatus.inactive,
+                  post.id));
+            },
+          ),
           Expanded(child:
             _buildComments(_fullscreenPostBloc.postComments),
           ),
-//          Expanded(
-//            child: _buildAddCommentField(),
-//          )
+          Expanded(
+            child: _buildAddCommentField(),
+          )
         ],
       ),
     );
@@ -147,11 +165,42 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
     );
   }
 
-  void changeLikeStatus() {
-    _fullscreenPostBloc.add(
-      FullscreenPostEvent.changeLikeStatus(),
+  Widget _buildSignInPopUp() {
+    return AlertDialog(
+      title: Text('Вы не вошли в систему'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post));
+          },
+          child: Text('Понятно'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  opaque: false, pageBuilder: (_, __, ___) => SignInScreen()),
+            );
+          },
+          child: Text('Войти'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                  opaque: false, pageBuilder: (_, __, ___) => SignUpScreen()),
+            );
+          },
+          child: Text('Зарегистрироваться'),
+        ),
+      ],
     );
   }
+
+
+
 
   void _openUserProfile(BuildContext context, Post post) {
     Navigator.push(

@@ -113,7 +113,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
       child: Column(
         children: [
           _buildTopToolbar(),
-          Expanded(child: _buildTextField()),
+          _buildTextField(),
+          Expanded(
+              child: _buildNoPhotoMessage()
+          ),
           _buildAddPhotoButton(context)
         ],
       ),
@@ -124,8 +127,22 @@ class _AddPostScreenState extends State<AddPostScreen> {
     return Center(
         child: Container(
       margin: EdgeInsets.all(10),
-      child: Image.file(_addPostScreenBloc.imageFile, width: 400, height: 400),
+      child: Image.file(_addPostScreenBloc.imageFile!, width: 400, height: 400),
     ));
+  }
+
+  Widget _buildNoPhotoMessage() {
+    return Center(
+      child: Container(
+          child: Text(
+            'Фото не добавлено',
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 20
+            ),
+          )
+      )
+    );
   }
 
   Widget _buildTopToolbar() {
@@ -139,7 +156,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   child: IconButton(
                     icon: Icon(Icons.cancel),
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            opaque: false, pageBuilder: (_, __, ___) => HomeScreen()),
+                      );
                     },
                   ))),
           _buildPublishButton(),
@@ -156,7 +177,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
       ),
       onPressed: () {
         if (_buttonsEnabled) {
-          if (textController.text.isNotEmpty) {
+          if (textController.text.isNotEmpty && _addPostScreenBloc.imageFile != null) {
             _addPostScreenBloc.add(AddPostScreenEvent.setLoading());
             _addPostScreenBloc
                 .add(AddPostScreenEvent.send(textController.text));

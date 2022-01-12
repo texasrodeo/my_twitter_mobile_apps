@@ -23,8 +23,12 @@ class _$FullscreenPostEventTearOff {
     );
   }
 
-  _ChangeLikeStatus changeLikeStatus() {
-    return const _ChangeLikeStatus();
+  _ChangeLikeStatus changeLikeStatus(
+      LikeStatus currentLikeStatus, String postId) {
+    return _ChangeLikeStatus(
+      currentLikeStatus,
+      postId,
+    );
   }
 
   _LoadMoreComments loadMoreComments() {
@@ -46,7 +50,8 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
-    required TResult Function() changeLikeStatus,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
     required TResult Function() loadMoreComments,
     required TResult Function(String text) addComment,
   }) =>
@@ -54,7 +59,8 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
   }) =>
@@ -62,7 +68,8 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
     required TResult orElse(),
@@ -184,7 +191,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
-    required TResult Function() changeLikeStatus,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
     required TResult Function() loadMoreComments,
     required TResult Function(String text) addComment,
   }) {
@@ -195,7 +203,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
   }) {
@@ -206,7 +215,8 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
     required TResult orElse(),
@@ -269,6 +279,7 @@ abstract class _$ChangeLikeStatusCopyWith<$Res> {
   factory _$ChangeLikeStatusCopyWith(
           _ChangeLikeStatus value, $Res Function(_ChangeLikeStatus) then) =
       __$ChangeLikeStatusCopyWithImpl<$Res>;
+  $Res call({LikeStatus currentLikeStatus, String postId});
 }
 
 /// @nodoc
@@ -281,60 +292,94 @@ class __$ChangeLikeStatusCopyWithImpl<$Res>
 
   @override
   _ChangeLikeStatus get _value => super._value as _ChangeLikeStatus;
+
+  @override
+  $Res call({
+    Object? currentLikeStatus = freezed,
+    Object? postId = freezed,
+  }) {
+    return _then(_ChangeLikeStatus(
+      currentLikeStatus == freezed
+          ? _value.currentLikeStatus
+          : currentLikeStatus // ignore: cast_nullable_to_non_nullable
+              as LikeStatus,
+      postId == freezed
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_ChangeLikeStatus implements _ChangeLikeStatus {
-  const _$_ChangeLikeStatus();
+  const _$_ChangeLikeStatus(this.currentLikeStatus, this.postId);
+
+  @override
+  final LikeStatus currentLikeStatus;
+  @override
+  final String postId;
 
   @override
   String toString() {
-    return 'FullscreenPostEvent.changeLikeStatus()';
+    return 'FullscreenPostEvent.changeLikeStatus(currentLikeStatus: $currentLikeStatus, postId: $postId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _ChangeLikeStatus);
+        (other.runtimeType == runtimeType &&
+            other is _ChangeLikeStatus &&
+            (identical(other.currentLikeStatus, currentLikeStatus) ||
+                other.currentLikeStatus == currentLikeStatus) &&
+            (identical(other.postId, postId) || other.postId == postId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, currentLikeStatus, postId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$ChangeLikeStatusCopyWith<_ChangeLikeStatus> get copyWith =>
+      __$ChangeLikeStatusCopyWithImpl<_ChangeLikeStatus>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
-    required TResult Function() changeLikeStatus,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
     required TResult Function() loadMoreComments,
     required TResult Function(String text) addComment,
   }) {
-    return changeLikeStatus();
+    return changeLikeStatus(currentLikeStatus, postId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
   }) {
-    return changeLikeStatus?.call();
+    return changeLikeStatus?.call(currentLikeStatus, postId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
     required TResult orElse(),
   }) {
     if (changeLikeStatus != null) {
-      return changeLikeStatus();
+      return changeLikeStatus(currentLikeStatus, postId);
     }
     return orElse();
   }
@@ -378,7 +423,14 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
 }
 
 abstract class _ChangeLikeStatus implements FullscreenPostEvent {
-  const factory _ChangeLikeStatus() = _$_ChangeLikeStatus;
+  const factory _ChangeLikeStatus(LikeStatus currentLikeStatus, String postId) =
+      _$_ChangeLikeStatus;
+
+  LikeStatus get currentLikeStatus;
+  String get postId;
+  @JsonKey(ignore: true)
+  _$ChangeLikeStatusCopyWith<_ChangeLikeStatus> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -423,7 +475,8 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
-    required TResult Function() changeLikeStatus,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
     required TResult Function() loadMoreComments,
     required TResult Function(String text) addComment,
   }) {
@@ -434,7 +487,8 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
   }) {
@@ -445,7 +499,8 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
     required TResult orElse(),
@@ -563,7 +618,8 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
-    required TResult Function() changeLikeStatus,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
     required TResult Function() loadMoreComments,
     required TResult Function(String text) addComment,
   }) {
@@ -574,7 +630,8 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
   }) {
@@ -585,7 +642,8 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
-    TResult Function()? changeLikeStatus,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
     TResult Function()? loadMoreComments,
     TResult Function(String text)? addComment,
     required TResult orElse(),
@@ -661,6 +719,10 @@ class _$FullscreenPostStateTearOff {
   _ErrorLoading errorLoading() {
     return const _ErrorLoading();
   }
+
+  _Unauthicated unauthicated() {
+    return const _Unauthicated();
+  }
 }
 
 /// @nodoc
@@ -673,6 +735,7 @@ mixin _$FullscreenPostState {
     required TResult Function() initial,
     required TResult Function(Post post, String postString) showPost,
     required TResult Function() errorLoading,
+    required TResult Function() unauthicated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -680,6 +743,7 @@ mixin _$FullscreenPostState {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -687,6 +751,7 @@ mixin _$FullscreenPostState {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -695,6 +760,7 @@ mixin _$FullscreenPostState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_ShowPost value) showPost,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_Unauthicated value) unauthicated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -702,6 +768,7 @@ mixin _$FullscreenPostState {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -709,6 +776,7 @@ mixin _$FullscreenPostState {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -773,6 +841,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(Post post, String postString) showPost,
     required TResult Function() errorLoading,
+    required TResult Function() unauthicated,
   }) {
     return initial();
   }
@@ -783,6 +852,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
   }) {
     return initial?.call();
   }
@@ -793,6 +863,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -807,6 +878,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_ShowPost value) showPost,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_Unauthicated value) unauthicated,
   }) {
     return initial(this);
   }
@@ -817,6 +889,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
   }) {
     return initial?.call(this);
   }
@@ -827,6 +900,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -923,6 +997,7 @@ class _$_ShowPost implements _ShowPost {
     required TResult Function() initial,
     required TResult Function(Post post, String postString) showPost,
     required TResult Function() errorLoading,
+    required TResult Function() unauthicated,
   }) {
     return showPost(post, postString);
   }
@@ -933,6 +1008,7 @@ class _$_ShowPost implements _ShowPost {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
   }) {
     return showPost?.call(post, postString);
   }
@@ -943,6 +1019,7 @@ class _$_ShowPost implements _ShowPost {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
     required TResult orElse(),
   }) {
     if (showPost != null) {
@@ -957,6 +1034,7 @@ class _$_ShowPost implements _ShowPost {
     required TResult Function(_Initial value) initial,
     required TResult Function(_ShowPost value) showPost,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_Unauthicated value) unauthicated,
   }) {
     return showPost(this);
   }
@@ -967,6 +1045,7 @@ class _$_ShowPost implements _ShowPost {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
   }) {
     return showPost?.call(this);
   }
@@ -977,6 +1056,7 @@ class _$_ShowPost implements _ShowPost {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
     required TResult orElse(),
   }) {
     if (showPost != null) {
@@ -1040,6 +1120,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function() initial,
     required TResult Function(Post post, String postString) showPost,
     required TResult Function() errorLoading,
+    required TResult Function() unauthicated,
   }) {
     return errorLoading();
   }
@@ -1050,6 +1131,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
   }) {
     return errorLoading?.call();
   }
@@ -1060,6 +1142,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function()? initial,
     TResult Function(Post post, String postString)? showPost,
     TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
@@ -1074,6 +1157,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_ShowPost value) showPost,
     required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_Unauthicated value) unauthicated,
   }) {
     return errorLoading(this);
   }
@@ -1084,6 +1168,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
   }) {
     return errorLoading?.call(this);
   }
@@ -1094,6 +1179,7 @@ class _$_ErrorLoading implements _ErrorLoading {
     TResult Function(_Initial value)? initial,
     TResult Function(_ShowPost value)? showPost,
     TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
     required TResult orElse(),
   }) {
     if (errorLoading != null) {
@@ -1105,4 +1191,121 @@ class _$_ErrorLoading implements _ErrorLoading {
 
 abstract class _ErrorLoading implements FullscreenPostState {
   const factory _ErrorLoading() = _$_ErrorLoading;
+}
+
+/// @nodoc
+abstract class _$UnauthicatedCopyWith<$Res> {
+  factory _$UnauthicatedCopyWith(
+          _Unauthicated value, $Res Function(_Unauthicated) then) =
+      __$UnauthicatedCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UnauthicatedCopyWithImpl<$Res>
+    extends _$FullscreenPostStateCopyWithImpl<$Res>
+    implements _$UnauthicatedCopyWith<$Res> {
+  __$UnauthicatedCopyWithImpl(
+      _Unauthicated _value, $Res Function(_Unauthicated) _then)
+      : super(_value, (v) => _then(v as _Unauthicated));
+
+  @override
+  _Unauthicated get _value => super._value as _Unauthicated;
+}
+
+/// @nodoc
+
+class _$_Unauthicated implements _Unauthicated {
+  const _$_Unauthicated();
+
+  @override
+  String toString() {
+    return 'FullscreenPostState.unauthicated()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _Unauthicated);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Post post, String postString) showPost,
+    required TResult Function() errorLoading,
+    required TResult Function() unauthicated,
+  }) {
+    return unauthicated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Post post, String postString)? showPost,
+    TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
+  }) {
+    return unauthicated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Post post, String postString)? showPost,
+    TResult Function()? errorLoading,
+    TResult Function()? unauthicated,
+    required TResult orElse(),
+  }) {
+    if (unauthicated != null) {
+      return unauthicated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_ShowPost value) showPost,
+    required TResult Function(_ErrorLoading value) errorLoading,
+    required TResult Function(_Unauthicated value) unauthicated,
+  }) {
+    return unauthicated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowPost value)? showPost,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
+  }) {
+    return unauthicated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_ShowPost value)? showPost,
+    TResult Function(_ErrorLoading value)? errorLoading,
+    TResult Function(_Unauthicated value)? unauthicated,
+    required TResult orElse(),
+  }) {
+    if (unauthicated != null) {
+      return unauthicated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Unauthicated implements FullscreenPostState {
+  const factory _Unauthicated() = _$_Unauthicated;
 }
