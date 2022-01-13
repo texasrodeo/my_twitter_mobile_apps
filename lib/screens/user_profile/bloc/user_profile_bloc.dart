@@ -29,7 +29,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
 
     UserProfileBloc(): _authService = AuthService(),super(_Initial());
 
-    int page = 1, perPage = 1;
+    int page = 1, perPage = 2;
 
     late User user;
     late int postsCount;

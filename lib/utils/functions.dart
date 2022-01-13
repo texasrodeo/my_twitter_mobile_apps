@@ -11,4 +11,15 @@ class SharedFunctions{
         return '-1';
     }
   }
+
+  static LikeStatus convertLikeStatus(LikeStatus status){
+    LikeStatus l;
+    if(status == LikeStatus.active){
+      l = LikeStatus.inactive;
+    }
+    else{
+      l = LikeStatus.active;
+    }
+    return l;
+  }
 }

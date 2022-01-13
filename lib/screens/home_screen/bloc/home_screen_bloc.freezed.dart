@@ -36,6 +36,13 @@ class _$HomeScreenEventTearOff {
   _Refresh refresh() {
     return const _Refresh();
   }
+
+  _RefreshPost refreshPost(Post post, LikeStatus currentLikeStatus) {
+    return _RefreshPost(
+      post,
+      currentLikeStatus,
+    );
+  }
 }
 
 /// @nodoc
@@ -50,6 +57,8 @@ mixin _$HomeScreenEvent {
         changeLikeStatus,
     required TResult Function() loadMore,
     required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +68,7 @@ mixin _$HomeScreenEvent {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -68,6 +78,7 @@ mixin _$HomeScreenEvent {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -77,6 +88,7 @@ mixin _$HomeScreenEvent {
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +97,7 @@ mixin _$HomeScreenEvent {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -93,6 +106,7 @@ mixin _$HomeScreenEvent {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -158,6 +172,8 @@ class _$_Started implements _Started {
         changeLikeStatus,
     required TResult Function() loadMore,
     required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
   }) {
     return started();
   }
@@ -170,6 +186,7 @@ class _$_Started implements _Started {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
   }) {
     return started?.call();
   }
@@ -182,6 +199,7 @@ class _$_Started implements _Started {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -197,6 +215,7 @@ class _$_Started implements _Started {
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
   }) {
     return started(this);
   }
@@ -208,6 +227,7 @@ class _$_Started implements _Started {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
   }) {
     return started?.call(this);
   }
@@ -219,6 +239,7 @@ class _$_Started implements _Started {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -310,6 +331,8 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
         changeLikeStatus,
     required TResult Function() loadMore,
     required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
   }) {
     return changeLikeStatus(currentLikeStatus, postId);
   }
@@ -322,6 +345,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
   }) {
     return changeLikeStatus?.call(currentLikeStatus, postId);
   }
@@ -334,6 +358,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
     required TResult orElse(),
   }) {
     if (changeLikeStatus != null) {
@@ -349,6 +374,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
   }) {
     return changeLikeStatus(this);
   }
@@ -360,6 +386,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
   }) {
     return changeLikeStatus?.call(this);
   }
@@ -371,6 +398,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
     required TResult orElse(),
   }) {
     if (changeLikeStatus != null) {
@@ -434,6 +462,8 @@ class _$_LoadMore implements _LoadMore {
         changeLikeStatus,
     required TResult Function() loadMore,
     required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
   }) {
     return loadMore();
   }
@@ -446,6 +476,7 @@ class _$_LoadMore implements _LoadMore {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
   }) {
     return loadMore?.call();
   }
@@ -458,6 +489,7 @@ class _$_LoadMore implements _LoadMore {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -473,6 +505,7 @@ class _$_LoadMore implements _LoadMore {
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
   }) {
     return loadMore(this);
   }
@@ -484,6 +517,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
   }) {
     return loadMore?.call(this);
   }
@@ -495,6 +529,7 @@ class _$_LoadMore implements _LoadMore {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
     required TResult orElse(),
   }) {
     if (loadMore != null) {
@@ -551,6 +586,8 @@ class _$_Refresh implements _Refresh {
         changeLikeStatus,
     required TResult Function() loadMore,
     required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
   }) {
     return refresh();
   }
@@ -563,6 +600,7 @@ class _$_Refresh implements _Refresh {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
   }) {
     return refresh?.call();
   }
@@ -575,6 +613,7 @@ class _$_Refresh implements _Refresh {
         changeLikeStatus,
     TResult Function()? loadMore,
     TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -590,6 +629,7 @@ class _$_Refresh implements _Refresh {
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
   }) {
     return refresh(this);
   }
@@ -601,6 +641,7 @@ class _$_Refresh implements _Refresh {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
   }) {
     return refresh?.call(this);
   }
@@ -612,6 +653,7 @@ class _$_Refresh implements _Refresh {
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
     required TResult orElse(),
   }) {
     if (refresh != null) {
@@ -623,6 +665,181 @@ class _$_Refresh implements _Refresh {
 
 abstract class _Refresh implements HomeScreenEvent {
   const factory _Refresh() = _$_Refresh;
+}
+
+/// @nodoc
+abstract class _$RefreshPostCopyWith<$Res> {
+  factory _$RefreshPostCopyWith(
+          _RefreshPost value, $Res Function(_RefreshPost) then) =
+      __$RefreshPostCopyWithImpl<$Res>;
+  $Res call({Post post, LikeStatus currentLikeStatus});
+
+  $PostCopyWith<$Res> get post;
+}
+
+/// @nodoc
+class __$RefreshPostCopyWithImpl<$Res>
+    extends _$HomeScreenEventCopyWithImpl<$Res>
+    implements _$RefreshPostCopyWith<$Res> {
+  __$RefreshPostCopyWithImpl(
+      _RefreshPost _value, $Res Function(_RefreshPost) _then)
+      : super(_value, (v) => _then(v as _RefreshPost));
+
+  @override
+  _RefreshPost get _value => super._value as _RefreshPost;
+
+  @override
+  $Res call({
+    Object? post = freezed,
+    Object? currentLikeStatus = freezed,
+  }) {
+    return _then(_RefreshPost(
+      post == freezed
+          ? _value.post
+          : post // ignore: cast_nullable_to_non_nullable
+              as Post,
+      currentLikeStatus == freezed
+          ? _value.currentLikeStatus
+          : currentLikeStatus // ignore: cast_nullable_to_non_nullable
+              as LikeStatus,
+    ));
+  }
+
+  @override
+  $PostCopyWith<$Res> get post {
+    return $PostCopyWith<$Res>(_value.post, (value) {
+      return _then(_value.copyWith(post: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$_RefreshPost implements _RefreshPost {
+  const _$_RefreshPost(this.post, this.currentLikeStatus);
+
+  @override
+  final Post post;
+  @override
+  final LikeStatus currentLikeStatus;
+
+  @override
+  String toString() {
+    return 'HomeScreenEvent.refreshPost(post: $post, currentLikeStatus: $currentLikeStatus)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RefreshPost &&
+            (identical(other.post, post) || other.post == post) &&
+            (identical(other.currentLikeStatus, currentLikeStatus) ||
+                other.currentLikeStatus == currentLikeStatus));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, post, currentLikeStatus);
+
+  @JsonKey(ignore: true)
+  @override
+  _$RefreshPostCopyWith<_RefreshPost> get copyWith =>
+      __$RefreshPostCopyWithImpl<_RefreshPost>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
+    required TResult Function() loadMore,
+    required TResult Function() refresh,
+    required TResult Function(Post post, LikeStatus currentLikeStatus)
+        refreshPost,
+  }) {
+    return refreshPost(post, currentLikeStatus);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
+    TResult Function()? loadMore,
+    TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
+  }) {
+    return refreshPost?.call(post, currentLikeStatus);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
+    TResult Function()? loadMore,
+    TResult Function()? refresh,
+    TResult Function(Post post, LikeStatus currentLikeStatus)? refreshPost,
+    required TResult orElse(),
+  }) {
+    if (refreshPost != null) {
+      return refreshPost(post, currentLikeStatus);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Refresh value) refresh,
+    required TResult Function(_RefreshPost value) refreshPost,
+  }) {
+    return refreshPost(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
+  }) {
+    return refreshPost?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Refresh value)? refresh,
+    TResult Function(_RefreshPost value)? refreshPost,
+    required TResult orElse(),
+  }) {
+    if (refreshPost != null) {
+      return refreshPost(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RefreshPost implements HomeScreenEvent {
+  const factory _RefreshPost(Post post, LikeStatus currentLikeStatus) =
+      _$_RefreshPost;
+
+  Post get post;
+  LikeStatus get currentLikeStatus;
+  @JsonKey(ignore: true)
+  _$RefreshPostCopyWith<_RefreshPost> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

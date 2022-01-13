@@ -78,6 +78,9 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
 
   Future<HomeScreenState> changeLikeStatus(_ChangeLikeStatus event) async {
     if(await _authService.isSignedIn()){
+
+      log('asds');
+
       LikeStatus currentLikeStatus = event.currentLikeStatus;
       LikeStatus newLikeStatus;
 
@@ -129,6 +132,17 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
     }
 
 
+  }
+
+  HomeScreenState processRefreshPost(Post post, LikeStatus likeStatus){
+    log(likeStatus.toString());
+    Post newPost = post.copyWith(
+      likeStatus: likeStatus,
+    );
+    int indexToReplace = postsToShow.indexWhere((element) =>
+    element.id == newPost.id);
+    postsToShow[indexToReplace] = newPost;
+    return _ShowPosts(postsToShow, postsToShow.toString());
   }
 
 
@@ -189,6 +203,10 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
     if(event is _Refresh){
       page = 1;
       yield await processLoadSignal();
+    }
+
+    if(event is _RefreshPost){
+      yield processRefreshPost(event.post, event.currentLikeStatus);
     }
   }
 

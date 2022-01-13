@@ -157,17 +157,21 @@ class FullscreenPostBloc
         Post newPost = postToShow.copyWith(
           likeStatus: newLikeStatus,
         );
+        log(postToShow.likes.length.toString());
 
         postToShow = newPost;
+        log(postToShow.likes.length.toString());
         Like like = new Like(userId: _authService.getUserEmail()!);
         if (newLikeStatus == LikeStatus.active) {
+          log(postToShow.likes.length.toString());
           postToShow.likes.add(like);
         } else {
           postToShow.likes.remove(like);
         }
       }
+
       return _ShowPost(postToShow, postToShow.toString());
-      ;
+
     } else {
       return _Unauthicated();
     }

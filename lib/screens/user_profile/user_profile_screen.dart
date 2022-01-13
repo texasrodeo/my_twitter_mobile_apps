@@ -16,6 +16,7 @@ import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:my_twitter/screens/user_profile/bloc/user_profile_bloc.dart';
 import 'package:my_twitter/screens/user_settings_screen/bloc/user_settings_bloc.dart';
 import 'package:my_twitter/screens/user_settings_screen/user_settings_screen.dart';
+import 'package:my_twitter/utils/functions.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final User? user;
@@ -69,7 +70,7 @@ class _UserProfileState extends State<UserProfileScreen> {
                     },
                     showProfile: (User user, List<Post> postsToShow,
                         String postsToShowString) {
-                      viewToReturn = _showProfileBuilder(user, postsToShow);
+                      viewToReturn = _showProfileBuilder(context, user, postsToShow);
                     },
                     unauthicated: () {
                       viewToReturn = _buildSignInPopUp();
@@ -111,7 +112,7 @@ class _UserProfileState extends State<UserProfileScreen> {
                     },
                     showProfile: (User user, List<Post> postsToShow,
                         String postsToShowString) {
-                      viewToReturn = _showProfileBuilder(user, postsToShow);
+                      viewToReturn = _showProfileBuilder(context, user, postsToShow);
                     },
                     unauthicated: () {
                       viewToReturn = _buildSignInPopUp();
@@ -132,7 +133,7 @@ class _UserProfileState extends State<UserProfileScreen> {
   }
 
 
-  Widget _showProfileBuilder(User user, List<Post> postsToShow) {
+  Widget _showProfileBuilder(BuildContext buildContext, User user, List<Post> postsToShow) {
 //    return LazyLoadScrollView(
 //      scrollOffset: (MediaQuery.of(context).size.height * 0.7).toInt(),
 //      onEndOfPage: () {
@@ -157,20 +158,23 @@ class _UserProfileState extends State<UserProfileScreen> {
                   ListView.builder(
                     shrinkWrap: true,
                     itemCount: postsToShow.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemBuilder: (BuildContext buildContext, int index) {
                       if (index != postsToShow.length) {
                         Post post = postsToShow[index];
                         return PostCard(
                           post: post,
                           index: index,
                           onLikeTap: () {
+                            BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.refreshPost(post, SharedFunctions.convertLikeStatus(post.likeStatus!)));
                             _userProfileBloc.add(
                                 UserProfileEvent.changeLikeStatus(
                                     post.likeStatus ?? LikeStatus.inactive,
                                     post.id));
-                            BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.changeLikeStatus(
-                                post.likeStatus ?? LikeStatus.inactive,
-                                post.id));
+//                            log(context.widget.toString());
+//                            log(context.toString());
+//                            BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.changeLikeStatus(
+//                                post.likeStatus ?? LikeStatus.inactive,
+//                                post.id));
                           },
                         );
                       }

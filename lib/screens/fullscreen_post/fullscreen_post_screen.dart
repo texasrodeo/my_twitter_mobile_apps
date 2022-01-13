@@ -14,6 +14,7 @@ import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
+import 'package:my_twitter/utils/functions.dart';
 
 class FullScreenPostScreen extends StatefulWidget {
   final Post post;
@@ -83,10 +84,8 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
               post: post,
               index: 1,
             onLikeTap: () {
-              _fullscreenPostBloc.add(FullscreenPostEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
-              BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.changeLikeStatus(
-                  post.likeStatus ?? LikeStatus.inactive,
-                  post.id));
+                BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.refreshPost(post, SharedFunctions.convertLikeStatus(post.likeStatus!)));
+                _fullscreenPostBloc.add(FullscreenPostEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
             },
           ),
           Expanded(child:
