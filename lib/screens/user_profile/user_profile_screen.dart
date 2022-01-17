@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lazy_load_scrollview/lazy_load_scrollview.dart';
 import 'package:my_twitter/components/footer.dart';
 import 'package:my_twitter/components/post_card.dart';
@@ -10,12 +10,11 @@ import 'package:my_twitter/components/user_card.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
 import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
-import 'package:my_twitter/screens/home_screen/home_screen.dart';
 import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:my_twitter/screens/user_profile/bloc/user_profile_bloc.dart';
-import 'package:my_twitter/screens/user_settings_screen/bloc/user_settings_bloc.dart';
 import 'package:my_twitter/screens/user_settings_screen/user_settings_screen.dart';
+import 'package:my_twitter/services/auth/auth_service.dart';
 import 'package:my_twitter/utils/functions.dart';
 
 class UserProfileScreen extends StatefulWidget {
@@ -35,8 +34,12 @@ class _UserProfileState extends State<UserProfileScreen> {
   late UserProfileBloc _userProfileBloc;
   int? id;
 
+
+  final AuthService authService = AuthService();
+
   Widget viewToReturn = Container();
 
+  final int navigationIndex=2;
 
   @override
   void dispose() {
@@ -48,11 +51,15 @@ class _UserProfileState extends State<UserProfileScreen> {
   Widget build(BuildContext buildContext) {
     if (widget.user == null) {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white70,
-          toolbarHeight: 35,
-          iconTheme: IconThemeData(color: Colors.black),
-        ),
+          appBar: AppBar(
+        backgroundColor: Colors.transparent,
+            elevation: 0,
+            toolbarHeight: 30,
+            iconTheme: IconThemeData(
+                color: Colors.black,
+
+            ),
+          ),
         body: BlocProvider<UserProfileBloc>(
           create: (BuildContext context) => UserProfileBloc(),
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
@@ -85,16 +92,19 @@ class _UserProfileState extends State<UserProfileScreen> {
               }
           ),
         ),
-        bottomNavigationBar: Footer(),
-        endDrawer: _buildSideMenu(),
+        bottomNavigationBar: Footer(index: navigationIndex),
+        endDrawer: _buildSideMenu()
       );
     }
     else {
       return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white70,
-          toolbarHeight: 35,
-          iconTheme: IconThemeData(color: Colors.black),
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          toolbarHeight: 27,
+          iconTheme: IconThemeData(
+            color: Colors.black,
+          ),
         ),
         body: BlocProvider<UserProfileBloc>(
           create: (BuildContext context) => UserProfileBloc(),
@@ -115,6 +125,9 @@ class _UserProfileState extends State<UserProfileScreen> {
                       viewToReturn = _showProfileBuilder(context, user, postsToShow);
                     },
                     unauthicated: () {
+                      setState(() {
+
+                      });
                       viewToReturn = _buildSignInPopUp();
                     },
                     errorLoading: () {
@@ -127,25 +140,16 @@ class _UserProfileState extends State<UserProfileScreen> {
               }
           ),
         ),
-        bottomNavigationBar: Footer(),
+        bottomNavigationBar: Footer(index: navigationIndex),
+        endDrawer: _buildOptionsMenu(context)
       );
     }
   }
 
 
   Widget _showProfileBuilder(BuildContext buildContext, User user, List<Post> postsToShow) {
-//    return LazyLoadScrollView(
-//      scrollOffset: (MediaQuery.of(context).size.height * 0.7).toInt(),
-//      onEndOfPage: () {
-//        _userProfileBloc.add(UserProfileEvent.loadMore());
-//      },
-//      child:
     return Column(
         children: [
-          UserCard(
-              user: user,
-              postsCount: _userProfileBloc.postsCount
-          ),
           Expanded(
             child: LazyLoadScrollView(
                 scrollOffset: (MediaQuery
@@ -157,24 +161,26 @@ class _UserProfileState extends State<UserProfileScreen> {
                   child:
                   ListView.builder(
                     shrinkWrap: true,
-                    itemCount: postsToShow.length,
+                    itemCount: postsToShow.length+1,
                     itemBuilder: (BuildContext buildContext, int index) {
+                      if(index == 0){
+                        return UserCard(
+                          user: user,
+                          postsCount: _userProfileBloc.postsCount,
+                        );
+                      }
                       if (index != postsToShow.length) {
-                        Post post = postsToShow[index];
+                        Post post = postsToShow[index-1];
                         return PostCard(
                           post: post,
                           index: index,
+                          navigationIndex: navigationIndex,
                           onLikeTap: () {
                             BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.refreshPost(post, SharedFunctions.convertLikeStatus(post.likeStatus!)));
                             _userProfileBloc.add(
                                 UserProfileEvent.changeLikeStatus(
                                     post.likeStatus ?? LikeStatus.inactive,
                                     post.id));
-//                            log(context.widget.toString());
-//                            log(context.toString());
-//                            BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.changeLikeStatus(
-//                                post.likeStatus ?? LikeStatus.inactive,
-//                                post.id));
                           },
                         );
                       }
@@ -226,12 +232,6 @@ class _UserProfileState extends State<UserProfileScreen> {
     );
   }
 
-//  Widget _buildSideMenuButton(){
-//    return IconButton(
-//        onPressed: _buildSideMenu,
-//        icon: const Icon(Icons.more_vert)
-//    );
-//  }
 
   Widget _buildSideMenu() {
     if (widget.user == null) {
@@ -269,6 +269,47 @@ class _UserProfileState extends State<UserProfileScreen> {
     }
   }
 
+  Widget _buildOptionsMenu(BuildContext context) {
+      return Drawer(
+          child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  child: Text(
+                    'Действия',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                  decoration: BoxDecoration(
+                      color: Colors.green,
+                      image: DecorationImage(
+                          fit: BoxFit.fill,
+                          image: AssetImage('assets/images/background.jpg'))),
+                ),
+                ListTile(
+                  leading: Icon(Icons.report),
+                  title: Text('Пожаловаться на ползователя'),
+                  onTap: () => _sendComplaintForUser(context),
+                ),
+              ]
+          )
+      );
+  }
+
+  void _sendComplaintForUser(BuildContext context){
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          content: const Text('Жалоба отправлена'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Понятно'),
+            ),
+          ],
+        )
+    );
+  }
+
   void _goToSettings() {
     Navigator.push(
       context,
@@ -280,14 +321,8 @@ class _UserProfileState extends State<UserProfileScreen> {
   }
 
   void _signOut() {
+    Navigator.pop(context);
     _userProfileBloc.add(UserProfileEvent.signOut());
-//    Timer(
-//        Duration(seconds: 2),
-//            () {
-//          Navigator.of(context).pushReplacementNamed(
-//              _userProfileBloc.homeScreenRoute);
-//        }
-//    );
   }
 
   Future<void> _pullRefresh() async {

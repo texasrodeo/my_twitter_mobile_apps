@@ -1,7 +1,7 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_twitter/components/loadingBar.dart';
 import 'package:my_twitter/screens/sign_in_screen/bloc/sign_in_screen_bloc.dart';
@@ -50,12 +50,13 @@ class _SignInScreenState extends State<SignInScreen> {
           }, errorLoading: (String errorCode) {
             viewToReturn = _buildSignInScreenWithError(errorCode);
           }, showSuccess: () {
-//            Navigator.push(
-//                context,
-//                PageRouteBuilder(
-//                    opaque: false,
-//                    pageBuilder: (_, __, ___) => UserProfileScreen(user: null)));
-            viewToReturn = _buildSuccessScreen();
+            SchedulerBinding.instance!.addPostFrameCallback((_) {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (_, __, ___) => UserProfileScreen(user: null)));
+            });
           }, signingInProgress: () {
             viewToReturn = _showLoadingProcess();
           });

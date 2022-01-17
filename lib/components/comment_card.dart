@@ -17,17 +17,18 @@ class CommentCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(1),
       decoration: _boxDecoration,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildUserAvatar(),
-          Column(
+          Row(
             children: [
+              _buildUserAvatar(),
               _buildUserName(),
-              _buildCommentText()
             ],
-          )
+          ),
+          _buildCommentText()
         ],
-      )
+      ),
     );
   }
 
@@ -51,6 +52,7 @@ class CommentCard extends StatelessWidget {
   );
 
   Widget _buildUserName()=> Container(
+
       child: Text(
         comment.author.username,
         textAlign: TextAlign.end,
@@ -62,24 +64,27 @@ class CommentCard extends StatelessWidget {
   );
 
   Widget _buildCommentText() => Container(
+      margin: EdgeInsets.only(
+          left: 5
+      ),
     child: Text(
       comment.text,
-      textAlign: TextAlign.end,
-      overflow: TextOverflow.ellipsis,
+//      textAlign: TextAlign.start,
+//      overflow: TextOverflow.ellipsis,
       style: const TextStyle(
-          fontSize: 30
+          fontSize: 20
       ),
     )
   );
 
   Decoration get _boxDecoration => BoxDecoration(
 //    color: Colors.grey,
-    border: Border(
-      bottom: BorderSide (
-          width: 1,
-          color: Colors.grey,
-      ),
-    ),
+//    border: Border(
+//      bottom: BorderSide (
+//          width: 1,
+//          color: Colors.grey,
+//      ),
+//    ),
   );
 
 }

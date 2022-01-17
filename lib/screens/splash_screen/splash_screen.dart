@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,20 +16,20 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
+
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    Timer(
-        Duration(seconds: 3),
-            () { Navigator.of(context).pushReplacementNamed(widget.nextRoute); }
-    );
+      Timer(
+          Duration(seconds: 3),
+              () { Navigator.of(context).pushReplacementNamed(widget.nextRoute); }
+      );
   }
 
-  // Формирование виджета
+
+
   @override
   Widget build(BuildContext context) {
-    // А вот это вёрстка виджета,
-    // немного похоже на QML хотя явно не JSON структура
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(

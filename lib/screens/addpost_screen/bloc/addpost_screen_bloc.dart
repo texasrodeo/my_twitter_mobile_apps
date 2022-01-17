@@ -1,19 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:my_twitter/utils/constants.dart';
-import 'dart:io';
 import 'package:my_twitter/services/auth/auth_service.dart';
+import 'package:my_twitter/utils/constants.dart';
 
-
+part 'addpost_screen_bloc.freezed.dart';
 part 'addpost_screen_event.dart';
 part 'addpost_screen_state.dart';
-part 'addpost_screen_bloc.freezed.dart';
 
 Dio dio = Dio();
 

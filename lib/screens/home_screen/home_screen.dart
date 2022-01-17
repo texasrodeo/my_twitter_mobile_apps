@@ -24,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget viewToReturn = Container();
 
+  final int navigationIndex = 0;
+
   @override
   void dispose() {
     _homeScreenBloc.close();
@@ -66,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: Footer(index: navigationIndex),
     );
   }
 
@@ -76,6 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: RefreshIndicator(
         onRefresh: _pullRefresh,
         child: ListView.builder(
+          padding: EdgeInsets.only(
+            top: 10
+          ),
           shrinkWrap: true,
           physics: AlwaysScrollableScrollPhysics(),
           itemCount: postsToShow.length,
@@ -85,9 +90,9 @@ class _HomeScreenState extends State<HomeScreen> {
               return PostCard(
                 post: post,
                 index: index,
+                navigationIndex: navigationIndex,
                 onLikeTap: () {
                   _homeScreenBloc.add(HomeScreenEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
-
                 },
               );
             }

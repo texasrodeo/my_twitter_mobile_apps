@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ class PostCard extends StatelessWidget {
   final Post post;
   final VoidCallback? onLikeTap;
   final int index;
+  final int navigationIndex;
 
   final double? _profilePictureSize = 50;
 
@@ -18,6 +18,7 @@ class PostCard extends StatelessWidget {
     Key? key,
     required this.post,
     required this.index,
+    required this.navigationIndex,
     this.onLikeTap,
   }) : super(key: key);
 
@@ -56,18 +57,19 @@ class PostCard extends StatelessWidget {
       );
   }
 
-  EdgeInsets get _Margin => EdgeInsets.symmetric(
-    vertical: 4.0,
+  EdgeInsets get _Margin => EdgeInsets.only(
+    bottom: 10.0,
   );
 
   EdgeInsets get _Padding => EdgeInsets.symmetric(
-    vertical: 8.0,
+//    vertical: 8.0,
   );
 
   Decoration get _boxDecoration => BoxDecoration(
     border: Border(
-      bottom: BorderSide(color: Colors.grey)
+//      bottom: BorderSide(color: Colors.grey)
     ),
+//    color: Colors.red
   );
 
   Widget _buildUserData(BuildContext context) => Row(
@@ -136,7 +138,7 @@ class PostCard extends StatelessWidget {
 //          post.imageUrl,
 //          fit: BoxFit.fill,
 //        ),
-        child: Card(
+//        child: Card(
           child: CachedNetworkImage(
             progressIndicatorBuilder: (context, url, progress) => Center(
               child: CircularProgressIndicator(
@@ -147,7 +149,7 @@ class PostCard extends StatelessWidget {
             fit: BoxFit.fill,
           ),
         ),
-      )
+//      )
   );
 
 
@@ -232,6 +234,7 @@ class PostCard extends StatelessWidget {
         opaque: false,
          pageBuilder: (_, __, ___) => FullScreenPostScreen(
            post: post,
+           navigationIndex: navigationIndex,
          ),
       ),
     );
@@ -316,6 +319,7 @@ class _PostButton extends StatelessWidget {
                       fontSize: 20
                     ),
                   ),
+                  color: Colors.white,
                 )
               ],
             ),

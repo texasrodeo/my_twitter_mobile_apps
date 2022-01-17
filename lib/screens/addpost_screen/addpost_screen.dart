@@ -61,7 +61,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             });
             return viewToReturn;
           })),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: Footer(index: 1),
     );
   }
 

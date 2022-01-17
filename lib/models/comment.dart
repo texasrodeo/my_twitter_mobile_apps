@@ -1,5 +1,3 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:my_twitter/models/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

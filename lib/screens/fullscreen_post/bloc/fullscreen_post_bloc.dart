@@ -8,17 +8,12 @@ import 'package:my_twitter/models/comment.dart';
 import 'package:my_twitter/models/like.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
-import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:my_twitter/services/auth/auth_service.dart';
 import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/utils/functions.dart';
 
-import '../../../main.dart';
-
 part 'fullscreen_post_bloc.freezed.dart';
-
 part 'fullscreen_post_event.dart';
-
 part 'fullscreen_post_state.dart';
 
 Dio dio = Dio();
@@ -34,7 +29,7 @@ class FullscreenPostBloc
   late Post postToShow;
   late List<Comment> postComments = [];
 
-  int page = 1, perPage = 3;
+  int page = 1, perPage = 10;
   String requestUrl = '${Constants.apiBaseUrl}comments/post';
   String addCommentUrl = '${Constants.apiBaseUrl}comments/add';
 
@@ -69,7 +64,6 @@ class FullscreenPostBloc
     postToShow = event.post;
     buildParameters(
         event.post.id, this.page.toString(), this.perPage.toString());
-//    log(parameters.toString());
     final result = await dio.get(
       requestUrl,
       queryParameters: parameters,
@@ -83,7 +77,6 @@ class FullscreenPostBloc
   Future<FullscreenPostState> loadMoreComments() async {
     buildParameters(
         postToShow.id, this.page.toString(), this.perPage.toString());
-//    log(parameters.toString());
     final result = await dio.get(
       requestUrl,
       queryParameters: parameters,
@@ -95,10 +88,7 @@ class FullscreenPostBloc
   }
 
   void parseResponse(Response result) {
-//    log(result.toString());
     final commentsList = result.data;
-
-//    log(commentsList.toString());
     for (var comment in commentsList) {
       var contain =
           postComments.where((element) => element.id == comment['id']);
@@ -128,7 +118,6 @@ class FullscreenPostBloc
         );
       }
     }
-//    log(postComments.length.toString());
   }
 
   Future<FullscreenPostState> changeLikeStatus(_ChangeLikeStatus event) async {

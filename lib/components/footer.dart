@@ -1,10 +1,14 @@
+
 import 'package:flutter/material.dart';
-import 'package:my_twitter/screens/addpost_screen/addpost_screen.dart';
-import 'package:my_twitter/screens/home_screen/home_screen.dart';
-import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
-import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
 
 class Footer extends StatefulWidget {
+  final int index;
+
+  const Footer({
+    Key? key,
+    required this.index
+  }) : super(key: key);
+
 
   @override
   _FooterState createState() => _FooterState();
@@ -24,7 +28,6 @@ class _FooterState extends State<Footer>{
     '/Profile',
   ];
 
-
   void _onItemTap(int index) {
     setState(() {
       _selectedIndex = index;
@@ -41,25 +44,27 @@ class _FooterState extends State<Footer>{
 
   @override
   Widget build(BuildContext buildContext){
+      _selectedIndex = widget.index;
       return BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_filled),
-              label: "Home"
+              label: "Домой"
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add),
-                label: "Add post"
+                label: "Добавить пост"
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.supervised_user_circle),
-                label: "Profile",
+                label: "Профиль",
             ),
           ],
-//          currentIndex: _selectedIndex,
+
 
           iconSize: 25,
           onTap: _onItemTap,
+          currentIndex: _selectedIndex,
           elevation: 5,
           selectedItemColor: Colors.black,
       );

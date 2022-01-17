@@ -18,10 +18,12 @@ import 'package:my_twitter/utils/functions.dart';
 
 class FullScreenPostScreen extends StatefulWidget {
   final Post post;
+  final int navigationIndex;
 
   const FullScreenPostScreen({
     Key? key,
     required this.post,
+    required this.navigationIndex
   }) : super(key: key);
 
   @override
@@ -70,7 +72,7 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
           },
         ),
       ),
-      bottomNavigationBar: Footer(),
+      bottomNavigationBar: Footer(index: widget.navigationIndex),
     );
   }
 
@@ -80,46 +82,48 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          PostCard(
-              post: post,
-              index: 1,
-            onLikeTap: () {
-                BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.refreshPost(post, SharedFunctions.convertLikeStatus(post.likeStatus!)));
-                _fullscreenPostBloc.add(FullscreenPostEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
-            },
-          ),
           Expanded(child:
-            _buildComments(_fullscreenPostBloc.postComments),
+            _buildPostAndComments(post, _fullscreenPostBloc.postComments),
           ),
-          Expanded(
-            child: _buildAddCommentField(),
-          )
+            _buildAddCommentField(),
         ],
       ),
     );
   }
 
 
-  Widget _buildComments(List<Comment> postComments) =>
+  Widget _buildPostAndComments(Post post,List<Comment> postComments) =>
       LazyLoadScrollView(
         scrollOffset: (MediaQuery.of(context).size.height * 0.7).toInt(),
         child: RefreshIndicator(
           onRefresh: _pullRefresh,
           child: ListView.builder(
-            padding: EdgeInsets.all(5),
+            padding: EdgeInsets.all(2),
 //            shrinkWrap: true,
 //            physics: AlwaysScrollableScrollPhysics(),
-            itemCount: postComments.length,
+            itemCount: postComments.length+1,
             itemBuilder: (BuildContext context, int index) {
-              if (index != postComments.length) {
-                Comment comment = postComments[index];
+              if(index==0){
+                return Padding(
+                  padding: EdgeInsets.only(
+                    top: 5
+                  ),
+                  child: PostCard(
+                      post: post,
+                      index: 1,
+                      navigationIndex: widget.navigationIndex,
+                      onLikeTap: () {
+                        BlocProvider.of<HomeScreenBloc>(context).add(HomeScreenEvent.refreshPost(post, SharedFunctions.convertLikeStatus(post.likeStatus!)));
+                        _fullscreenPostBloc.add(FullscreenPostEvent.changeLikeStatus(post.likeStatus ?? LikeStatus.inactive, post.id));
+                      },
+                  ),
+                );
+              }
+//              if (index != postComments.length) {
+                Comment comment = postComments[index - 1];
                 return CommentCard(
                   comment: comment,
                   index: index,
-                );
-              } else
-                return Center(
-                  child: CircularProgressIndicator(),
                 );
             },
           ),
@@ -131,9 +135,6 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
 
   Widget _buildAddCommentField() {
     return Container(
-//      padding: EdgeInsets.only(bottom: 5),
-//      width: 300,
-//      height: 20,
       child: Row(
         children: [
           Expanded(
@@ -156,7 +157,6 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
             },
             icon: const Icon(
               Icons.send,
-//              size: 30,
             ),
           )
         ],

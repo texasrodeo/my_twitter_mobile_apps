@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-
-import 'package:dio/dio.dart';
-import 'package:logger/logger.dart';
 import 'package:my_twitter/models/like.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
@@ -14,9 +11,9 @@ import 'package:my_twitter/services/auth/auth_service.dart';
 import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/utils/functions.dart';
 
+part 'home_screen_bloc.freezed.dart';
 part 'home_screen_event.dart';
 part 'home_screen_state.dart';
-part 'home_screen_bloc.freezed.dart';
 
 Dio dio = Dio();
 
@@ -26,9 +23,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
 
   HomeScreenBloc() : _authService = AuthService(),super(_Initial());
 
-
-
-  var logger = Logger();
 
   int page = 1, perPage = 2;
   List<Post> postsToShow = [];

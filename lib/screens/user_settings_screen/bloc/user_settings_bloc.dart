@@ -10,7 +10,6 @@ import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/services/auth/auth_service.dart';
 import 'dart:io';
 import 'package:my_twitter/models/user.dart';
-import 'package:image_downloader/image_downloader.dart';
 
 part 'user_settings_bloc.freezed.dart';
 part 'user_settings_event.dart';

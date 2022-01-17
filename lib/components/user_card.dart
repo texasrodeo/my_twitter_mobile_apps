@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_twitter/models/user.dart';
@@ -13,11 +11,11 @@ class UserCard extends StatelessWidget{
   const UserCard({
     Key? key,
     required this.user,
-    required this.postsCount
+    required this.postsCount,
   }) : super(key: key);
 
   EdgeInsets get _bottomMargin => EdgeInsets.only(
-    bottom: 15,
+//    bottom: 15,
   );
 
   Decoration get _boxDecoration => BoxDecoration(
@@ -42,14 +40,13 @@ class UserCard extends StatelessWidget{
               Row(
                 children: [
                   _buildUserAvatar(),
-                  _buildUserName()
+                  _buildUserName(),
                 ],
               ),
               _buildPostsCount()
             ],
           )
         )
-
   );
 
   Widget _buildUserAvatar() => Container(
@@ -90,20 +87,13 @@ class UserCard extends StatelessWidget{
         margin: _bottomMargin,
         height: 100,
         decoration: _boxDecoration,
-        child: Row(
-              children: [
-                _buildUserData(),
-
-              ],
-
-            ),
-
+        child: _buildUserData(),
       );
   }
 
   Widget _buildPostsCount()=>Container(
     margin: EdgeInsets.only(
-      left: 5
+      left: 10
     ),
     child: Text(
       "Посты: " + postsCount.toString(),

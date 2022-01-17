@@ -2,8 +2,6 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:logger/logger.dart';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,13 +9,13 @@ import 'package:my_twitter/models/like.dart';
 import 'package:my_twitter/models/main_user_details.dart';
 import 'package:my_twitter/models/post.dart';
 import 'package:my_twitter/models/user.dart';
-import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/services/auth/auth_service.dart';
+import 'package:my_twitter/utils/constants.dart';
 import 'package:my_twitter/utils/functions.dart';
 
-part 'user_profile_state.dart';
-part 'user_profile_event.dart';
 part 'user_profile_bloc.freezed.dart';
+part 'user_profile_event.dart';
+part 'user_profile_state.dart';
 
 Dio dio =  Dio();
 
@@ -29,7 +27,7 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState>{
 
     UserProfileBloc(): _authService = AuthService(),super(_Initial());
 
-    int page = 1, perPage = 2;
+    int page = 1, perPage = 3;
 
     late User user;
     late int postsCount;
