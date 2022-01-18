@@ -236,7 +236,7 @@ class PostCard extends StatelessWidget {
     String s = uri.toString();
     Clipboard.setData(new ClipboardData(text: s)).then((_) {
       ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Email address copied to clipboard")));
+          SnackBar(content: Text("Ссылка скопирована в буфер обмена")));
     });
   }
 
