@@ -13,17 +13,19 @@ import 'package:my_twitter/screens/fullscreen_post/bloc/fullscreen_post_bloc.dar
 import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
 import 'package:my_twitter/screens/sign_up_screen/sign_up_screen.dart';
-import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
 import 'package:my_twitter/utils/functions.dart';
 
 class FullScreenPostScreen extends StatefulWidget {
-  final Post post;
+  final Post? post;
   final int navigationIndex;
+
+  final String? postId;
 
   const FullScreenPostScreen({
     Key? key,
-    required this.post,
-    required this.navigationIndex
+    this.post,
+    required this.navigationIndex,
+    this.postId,
   }) : super(key: key);
 
   @override
@@ -44,7 +46,6 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       body: BlocProvider<FullscreenPostBloc>(
         create: (BuildContext context) => FullscreenPostBloc(),
         child: BlocBuilder<FullscreenPostBloc, FullscreenPostState>(
@@ -54,7 +55,12 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
             state.when(initial: () {
               log('initial fullscreen');
               textController.text = "";
-              _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post));
+              if(widget.post!=null){
+                _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post!));
+              }
+              else if(widget.postId!=null){
+                _fullscreenPostBloc.add(FullscreenPostEvent.startedWithPostId(widget.postId!));
+              }
               viewToReturn = Center(
                 child: CircularProgressIndicator(),
               );
@@ -170,7 +176,12 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
       actions: [
         ElevatedButton(
           onPressed: () {
-            _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post));
+            if(widget.postId!=null){
+              _fullscreenPostBloc.add(FullscreenPostEvent.started(widget.post!));
+            }
+            else{
+              _fullscreenPostBloc.add(FullscreenPostEvent.startedWithPostId(widget.postId!));
+            }
           },
           child: Text('Понятно'),
         ),
@@ -201,17 +212,17 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
 
 
 
-  void _openUserProfile(BuildContext context, Post post) {
-    Navigator.push(
-      context,
-      PageRouteBuilder(
-        opaque: false,
-        pageBuilder: (_, __, ___) => UserProfileScreen(
-          user: widget.post.author,
-        ),
-      ),
-    );
-  }
+//  void _openUserProfile(BuildContext context, Post post) {
+//    Navigator.push(
+//      context,
+//      PageRouteBuilder(
+//        opaque: false,
+//        pageBuilder: (_, __, ___) => UserProfileScreen(
+//          user: widget.post.author,
+//        ),
+//      ),
+//    );
+//  }
 
   Future<void> _pullRefresh() async {
     return Future.delayed(Duration(seconds: 1), () {

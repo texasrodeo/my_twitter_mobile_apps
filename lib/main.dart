@@ -1,10 +1,11 @@
-import 'dart:developer';
+import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_twitter/screens/addpost_screen/addpost_screen.dart';
+import 'package:my_twitter/screens/fullscreen_post/fullscreen_post_screen.dart';
 import 'package:my_twitter/screens/home_screen/bloc/home_screen_bloc.dart';
 import 'package:my_twitter/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:my_twitter/screens/sign_in_screen/sign_in_screen.dart';
@@ -38,9 +39,13 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
 
+  bool initViaLink = false;
+
   @override
   void initState() {
     super.initState();
+    initFirebaseLinkWhileRunning();
+    initFirebaseLinkWhileDown();
   }
 
   final routes = <String, WidgetBuilder>{
@@ -49,8 +54,7 @@ class _MyAppState extends State<MyApp> {
     '/Profile' : (BuildContext context) => (UserProfileScreen(user: null)),
     '/SignIn' : (BuildContext context) => SignInScreen(),
     '/SignUp' : (BuildContext context) => SignUpScreen(),
-    '/OnBoarding' : (BuildContext context) => OnboardingScreen(nextRoute: '/Home',),
-    '/post' : (BuildContext context) => AddPostScreen()
+    '/OnBoarding' : (BuildContext context) => OnboardingScreen(nextRoute: '/Home',)
   };
 
   @override
@@ -70,9 +74,54 @@ class _MyAppState extends State<MyApp> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: initScreen == 0 || initScreen == null ? SplashScreen(nextRoute: '/OnBoarding') : SplashScreen(nextRoute: '/Home'),
+
         routes: routes,
       ),
     );
   }
+
+  initFirebaseLinkWhileDown() async {
+    final PendingDynamicLinkData? data = await FirebaseDynamicLinks.instance.getInitialLink();
+    Uri? deeplink = data != null ? data.link : null;
+
+    if(deeplink != null) {
+      initViaLink = true;
+      if (deeplink.path.contains('/post')) {
+        final queryParams = deeplink.queryParameters;
+        if(queryParams.length > 0) {
+          String? postId = queryParams["postId"];
+          Timer(
+              Duration(seconds: 4),
+                  () { Navigator.of(navigatorKey.currentContext!).push(PageRouteBuilder(
+                      opaque: false, pageBuilder: (_, __, ___) => FullScreenPostScreen(navigationIndex: 0, postId: postId,))); }
+          );
+        }
+      }
+    }
+
+  }
+
+  void initFirebaseLinkWhileRunning() async {
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData? dynamicLink) async {
+      final Uri? deepLink = dynamicLink!.link;
+
+      if (deepLink != null) {
+        if (deepLink.path.contains('/post')) {
+          final queryParams = deepLink.queryParameters;
+          if(queryParams.length > 0) {
+            String? postId = queryParams["postId"];
+            Navigator.of(navigatorKey.currentContext!).push(PageRouteBuilder(
+                opaque: false, pageBuilder: (_, __, ___) => FullScreenPostScreen(navigationIndex: 0, postId: postId,)));
+          }
+        }
+      }
+    }, onError: (OnLinkErrorException e) async {
+    print(e.message);
+    });
+  }
+
 }
+
+
 

@@ -118,7 +118,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
           postsToShow[indexToReplace].likes.remove(like);
         }
       }
-      return _ShowPosts(postsToShow, postsToShow.toString());;
+      return _ShowPosts(postsToShow, postsToShow.toString());
 
     }
     else{
@@ -153,7 +153,6 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState>{
       return _ShowPosts(postsToShow, postsToShow.toString());
 
     } catch (e) {
-      print(e);
       return _ErrorLoading();
     }
   }

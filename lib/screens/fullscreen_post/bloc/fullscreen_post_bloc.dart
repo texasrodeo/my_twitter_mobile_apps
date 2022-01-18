@@ -30,12 +30,20 @@ class FullscreenPostBloc
   late List<Comment> postComments = [];
 
   int page = 1, perPage = 10;
+  String getPostUrl = '${Constants.apiBaseUrl}posts/post';
+
   String requestUrl = '${Constants.apiBaseUrl}comments/post';
   String addCommentUrl = '${Constants.apiBaseUrl}comments/add';
 
   var parameters = Map<String, dynamic>();
 
   var addCommentparams = Map<String, dynamic>();
+
+  var getPostParams = Map<String, dynamic>();
+
+  void buildGetPostParams(String postId){
+    getPostParams['id'] = postId;
+  }
 
   void buildAddCommentParams(String postId, String text, String authorId) {
     addCommentparams['postId'] = postId;
@@ -74,6 +82,28 @@ class FullscreenPostBloc
     return _ShowPost(postToShow, postToShow.toString());
   }
 
+  Future<FullscreenPostState> processLoadEventForPostId(_StartedWithPostId event) async {
+    String postId = event.postId;
+    buildGetPostParams(postId);
+    final result = await dio.get(
+      getPostUrl,
+      queryParameters: getPostParams,
+    );
+
+    parsePostResponse(result);
+
+    buildParameters(
+        event.postId, this.page.toString(), this.perPage.toString());
+    final result2 = await dio.get(
+      requestUrl,
+      queryParameters: parameters,
+    );
+
+    parseResponse(result2);
+
+    return _ShowPost(postToShow, postToShow.toString());
+  }
+
   Future<FullscreenPostState> loadMoreComments() async {
     buildParameters(
         postToShow.id, this.page.toString(), this.perPage.toString());
@@ -85,6 +115,60 @@ class FullscreenPostBloc
     parseResponse(result);
 
     return _ShowPost(postToShow, postToShow.toString());
+  }
+
+  void parsePostResponse(Response result) async{
+    final p = result.data;
+    Post post = await buildPost(p);
+    postToShow = post;
+  }
+
+  Future<Post> buildPost(post) async {
+    List<Like> likes = [];
+    for(var l in post['likes']){
+      Like like = Like(
+          userId: l['userId']
+      );
+      likes.add(like);
+    }
+    LikeStatus likeStatus;
+    if(await _authService.isSignedIn()){
+      if(isPostLikedByUser(likes, _authService.getUserEmail()!)){
+        likeStatus = LikeStatus.active;
+      }
+      else{
+        likeStatus = LikeStatus.inactive;
+      }
+    }
+    else{
+      likeStatus = LikeStatus.inactive;
+    }
+
+    return Post(
+        text: post['text'],
+        imageUrl: post['imageUrl'],
+        id: post['id'],
+        author: User(
+            id: post['author']['id'],
+            username: post['author']['username'],
+            imageUrl: post['author']['avatarUrl'],
+            phone: post['author']['phone']
+        ),
+        likes: likes,
+        likeStatus: likeStatus
+    );
+  }
+
+  bool isPostLikedByUser(List<Like> likes, String userId){
+    bool res = false;
+    for(var l in likes){
+      if(l.userId == userId){
+        res = true;
+        break;
+      }
+    }
+    return res;
+
   }
 
   void parseResponse(Response result) {
@@ -194,6 +278,10 @@ class FullscreenPostBloc
   ) async* {
     if (event is _Started) {
       yield await processLoadEvent(event);
+    }
+
+    if(event is _StartedWithPostId) {
+      yield await processLoadEventForPostId(event);
     }
 
     if (event is _ChangeLikeStatus) {

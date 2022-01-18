@@ -23,6 +23,12 @@ class _$FullscreenPostEventTearOff {
     );
   }
 
+  _StartedWithPostId startedWithPostId(String postId) {
+    return _StartedWithPostId(
+      postId,
+    );
+  }
+
   _ChangeLikeStatus changeLikeStatus(
       LikeStatus currentLikeStatus, String postId) {
     return _ChangeLikeStatus(
@@ -50,6 +56,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() loadMoreComments,
@@ -59,6 +66,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -68,6 +76,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -78,6 +87,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
     required TResult Function(_AddComment value) addComment,
@@ -86,6 +96,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -94,6 +105,7 @@ mixin _$FullscreenPostEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -191,6 +203,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() loadMoreComments,
@@ -203,6 +216,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -215,6 +229,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -231,6 +246,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
     required TResult Function(_AddComment value) addComment,
@@ -242,6 +258,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -253,6 +270,7 @@ class _$_Started implements _Started {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -271,6 +289,160 @@ abstract class _Started implements FullscreenPostEvent {
   Post get post;
   @JsonKey(ignore: true)
   _$StartedCopyWith<_Started> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$StartedWithPostIdCopyWith<$Res> {
+  factory _$StartedWithPostIdCopyWith(
+          _StartedWithPostId value, $Res Function(_StartedWithPostId) then) =
+      __$StartedWithPostIdCopyWithImpl<$Res>;
+  $Res call({String postId});
+}
+
+/// @nodoc
+class __$StartedWithPostIdCopyWithImpl<$Res>
+    extends _$FullscreenPostEventCopyWithImpl<$Res>
+    implements _$StartedWithPostIdCopyWith<$Res> {
+  __$StartedWithPostIdCopyWithImpl(
+      _StartedWithPostId _value, $Res Function(_StartedWithPostId) _then)
+      : super(_value, (v) => _then(v as _StartedWithPostId));
+
+  @override
+  _StartedWithPostId get _value => super._value as _StartedWithPostId;
+
+  @override
+  $Res call({
+    Object? postId = freezed,
+  }) {
+    return _then(_StartedWithPostId(
+      postId == freezed
+          ? _value.postId
+          : postId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_StartedWithPostId implements _StartedWithPostId {
+  const _$_StartedWithPostId(this.postId);
+
+  @override
+  final String postId;
+
+  @override
+  String toString() {
+    return 'FullscreenPostEvent.startedWithPostId(postId: $postId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _StartedWithPostId &&
+            (identical(other.postId, postId) || other.postId == postId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, postId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$StartedWithPostIdCopyWith<_StartedWithPostId> get copyWith =>
+      __$StartedWithPostIdCopyWithImpl<_StartedWithPostId>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
+    required TResult Function(LikeStatus currentLikeStatus, String postId)
+        changeLikeStatus,
+    required TResult Function() loadMoreComments,
+    required TResult Function(String text) addComment,
+  }) {
+    return startedWithPostId(postId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
+    TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
+  }) {
+    return startedWithPostId?.call(postId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
+    TResult Function(LikeStatus currentLikeStatus, String postId)?
+        changeLikeStatus,
+    TResult Function()? loadMoreComments,
+    TResult Function(String text)? addComment,
+    required TResult orElse(),
+  }) {
+    if (startedWithPostId != null) {
+      return startedWithPostId(postId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
+    required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
+    required TResult Function(_LoadMoreComments value) loadMoreComments,
+    required TResult Function(_AddComment value) addComment,
+  }) {
+    return startedWithPostId(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
+  }) {
+    return startedWithPostId?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
+    TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
+    TResult Function(_LoadMoreComments value)? loadMoreComments,
+    TResult Function(_AddComment value)? addComment,
+    required TResult orElse(),
+  }) {
+    if (startedWithPostId != null) {
+      return startedWithPostId(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartedWithPostId implements FullscreenPostEvent {
+  const factory _StartedWithPostId(String postId) = _$_StartedWithPostId;
+
+  String get postId;
+  @JsonKey(ignore: true)
+  _$StartedWithPostIdCopyWith<_StartedWithPostId> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -348,6 +520,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() loadMoreComments,
@@ -360,6 +533,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -372,6 +546,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -388,6 +563,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
     required TResult Function(_AddComment value) addComment,
@@ -399,6 +575,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -410,6 +587,7 @@ class _$_ChangeLikeStatus implements _ChangeLikeStatus {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -475,6 +653,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() loadMoreComments,
@@ -487,6 +666,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -499,6 +679,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -515,6 +696,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
     required TResult Function(_AddComment value) addComment,
@@ -526,6 +708,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -537,6 +720,7 @@ class _$_LoadMoreComments implements _LoadMoreComments {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -618,6 +802,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Post post) started,
+    required TResult Function(String postId) startedWithPostId,
     required TResult Function(LikeStatus currentLikeStatus, String postId)
         changeLikeStatus,
     required TResult Function() loadMoreComments,
@@ -630,6 +815,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -642,6 +828,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Post post)? started,
+    TResult Function(String postId)? startedWithPostId,
     TResult Function(LikeStatus currentLikeStatus, String postId)?
         changeLikeStatus,
     TResult Function()? loadMoreComments,
@@ -658,6 +845,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
+    required TResult Function(_StartedWithPostId value) startedWithPostId,
     required TResult Function(_ChangeLikeStatus value) changeLikeStatus,
     required TResult Function(_LoadMoreComments value) loadMoreComments,
     required TResult Function(_AddComment value) addComment,
@@ -669,6 +857,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
@@ -680,6 +869,7 @@ class _$_AddComment implements _AddComment {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
+    TResult Function(_StartedWithPostId value)? startedWithPostId,
     TResult Function(_ChangeLikeStatus value)? changeLikeStatus,
     TResult Function(_LoadMoreComments value)? loadMoreComments,
     TResult Function(_AddComment value)? addComment,
