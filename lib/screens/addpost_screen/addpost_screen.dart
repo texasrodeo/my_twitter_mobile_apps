@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_twitter/components/footer.dart';
@@ -51,7 +52,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
             }, showScreenWithImage: () {
               viewToReturn = _buildAddPostScreenWithImage(context);
             }, showSuccess: () {
-              viewToReturn = _buildSuccessScreen();
+              SchedulerBinding.instance!.addPostFrameCallback((_) {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        opaque: false,
+                        pageBuilder: (_, __, ___) => HomeScreen()));
+              });
+//              viewToReturn = _buildSuccessScreen();
             }, unauthicated: () {
               viewToReturn = _buildSignInPopUp();
             }, errorLoading: () {
@@ -147,7 +155,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
 
   Widget _buildTopToolbar() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 20),
+      margin: EdgeInsets.only(
+          top: 30,
+          bottom: 20
+      ),
       child: Row(
         children: [
           Expanded(
@@ -268,44 +279,6 @@ class _AddPostScreenState extends State<AddPostScreen> {
   }
 
 
-
-  Widget _buildLoadingBar() {
-    return Align(
-      alignment: Alignment.center,
-      child: Container(
-        color: Colors.white,
-        width: 250.0,
-        height: 100.0,
-        child: Column(
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: new Center(child: new CircularProgressIndicator())),
-            Expanded(
-                child: Text(
-              'Подождите, пост публикуется',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ))
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildSuccessScreen() {
-    return Stack(
-      children: [
-        AnimatedOpacity(
-            opacity: 0.6,
-            duration: const Duration(milliseconds: 100),
-            child: _buildAddPostScreenWithImage(context)),
-        _buildSuccessAlert()
-      ],
-    );
-
-  }
 
   Widget _buildSuccessAlert(){
     return AlertDialog(

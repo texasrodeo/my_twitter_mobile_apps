@@ -251,27 +251,35 @@ class FullscreenPostBloc
   }
 
   Future<FullscreenPostState> addComment(_AddComment event) async {
-    String comment = event.text;
+    if(await _authService.isSignedIn()){
+      String comment = event.text;
 
-    try {
-      buildAddCommentParams(
-          postToShow.id, comment, _authService.getUserEmail()!);
-      Response response = await dio.post(
-        addCommentUrl,
-        data: jsonEncode(addCommentparams),
-      );
+      try {
+        buildAddCommentParams(
+            postToShow.id, comment, _authService.getUserEmail()!);
+        Response response = await dio.post(
+          addCommentUrl,
+          data: jsonEncode(addCommentparams),
+        );
 
-      if (response.statusCode == 200) {
-        return _Initial();
-      } else {
+        if (response.statusCode == 200) {
+          return _Initial();
+        } else {
+          return _ErrorLoading();
+        }
+      } catch (e) {
+        print(e);
         return _ErrorLoading();
       }
-    } catch (e) {
-      print(e);
-      return _ErrorLoading();
+    }
+    else{
+      return _Unauthicated();
     }
   }
 
+  Future<bool> isIsignedIn() async {
+    return await _authService.isSignedIn();
+  }
   @override
   Stream<FullscreenPostState> mapEventToState(
     FullscreenPostEvent event,

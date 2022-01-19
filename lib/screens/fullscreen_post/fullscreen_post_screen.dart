@@ -112,7 +112,7 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
               if(index==0){
                 return Padding(
                   padding: EdgeInsets.only(
-                    top: 5
+                    top: 40
                   ),
                   child: PostCard(
                       post: post,
@@ -209,20 +209,6 @@ class _FullScreenPostScreenState extends State<FullScreenPostScreen> {
     );
   }
 
-
-
-
-//  void _openUserProfile(BuildContext context, Post post) {
-//    Navigator.push(
-//      context,
-//      PageRouteBuilder(
-//        opaque: false,
-//        pageBuilder: (_, __, ___) => UserProfileScreen(
-//          user: widget.post.author,
-//        ),
-//      ),
-//    );
-//  }
 
   Future<void> _pullRefresh() async {
     return Future.delayed(Duration(seconds: 1), () {

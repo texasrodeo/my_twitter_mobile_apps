@@ -39,8 +39,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
 
-  bool initViaLink = false;
-
   @override
   void initState() {
     super.initState();
@@ -85,7 +83,6 @@ class _MyAppState extends State<MyApp> {
     Uri? deeplink = data != null ? data.link : null;
 
     if(deeplink != null) {
-      initViaLink = true;
       if (deeplink.path.contains('/post')) {
         final queryParams = deeplink.queryParameters;
         if(queryParams.length > 0) {

@@ -41,6 +41,8 @@ class _UserProfileState extends State<UserProfileScreen> {
 
   final int navigationIndex=2;
 
+  bool isSignedIn = true;
+
   @override
   void dispose() {
     _userProfileBloc.close();
@@ -51,15 +53,15 @@ class _UserProfileState extends State<UserProfileScreen> {
   Widget build(BuildContext buildContext) {
     if (widget.user == null) {
       return Scaffold(
-          appBar: AppBar(
-        backgroundColor: Colors.transparent,
+          appBar: isSignedIn ? AppBar(
+        backgroundColor: Colors.white,
             elevation: 0,
             toolbarHeight: 30,
             iconTheme: IconThemeData(
                 color: Colors.black,
 
             ),
-          ),
+          ) : null,
         body: BlocProvider<UserProfileBloc>(
           create: (BuildContext context) => UserProfileBloc(),
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
@@ -77,9 +79,11 @@ class _UserProfileState extends State<UserProfileScreen> {
                     },
                     showProfile: (User user, List<Post> postsToShow,
                         String postsToShowString) {
+                      isSignedIn = true;
                       viewToReturn = _showProfileBuilder(context, user, postsToShow);
                     },
                     unauthicated: () {
+                      isSignedIn = false;
                       viewToReturn = _buildSignInPopUp();
                     },
                     errorLoading: () {
@@ -98,14 +102,15 @@ class _UserProfileState extends State<UserProfileScreen> {
     }
     else {
       return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          toolbarHeight: 27,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          ),
-        ),
+          appBar: isSignedIn ? AppBar(
+            backgroundColor: Colors.white,
+            elevation: 0,
+            toolbarHeight: 30,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+
+            ),
+          ) : null,
         body: BlocProvider<UserProfileBloc>(
           create: (BuildContext context) => UserProfileBloc(),
           child: BlocBuilder<UserProfileBloc, UserProfileState>(
@@ -122,12 +127,11 @@ class _UserProfileState extends State<UserProfileScreen> {
                     },
                     showProfile: (User user, List<Post> postsToShow,
                         String postsToShowString) {
+                      isSignedIn = true;
                       viewToReturn = _showProfileBuilder(context, user, postsToShow);
                     },
                     unauthicated: () {
-                      setState(() {
-
-                      });
+                      isSignedIn = false;
                       viewToReturn = _buildSignInPopUp();
                     },
                     errorLoading: () {
@@ -169,7 +173,7 @@ class _UserProfileState extends State<UserProfileScreen> {
                           postsCount: _userProfileBloc.postsCount,
                         );
                       }
-                      if (index != postsToShow.length) {
+//                      if (index != postsToShow.length) {
                         Post post = postsToShow[index-1];
                         return PostCard(
                           post: post,
@@ -184,11 +188,12 @@ class _UserProfileState extends State<UserProfileScreen> {
                           },
                         );
                       }
-                      else
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                    },
+
+//                      else
+//                        return Center(
+//                          child: CircularProgressIndicator(),
+//                        );
+//                    },
                   ),
                 ),
               onEndOfPage: () {
@@ -287,7 +292,7 @@ class _UserProfileState extends State<UserProfileScreen> {
                 ),
                 ListTile(
                   leading: Icon(Icons.report),
-                  title: Text('Пожаловаться на ползователя'),
+                  title: Text('Пожаловаться на пользователя'),
                   onTap: () => _sendComplaintForUser(context),
                 ),
               ]

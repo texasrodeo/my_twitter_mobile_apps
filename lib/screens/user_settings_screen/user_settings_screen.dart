@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_twitter/screens/user_profile/user_profile_screen.dart';
@@ -58,7 +59,14 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
               viewToReturn = _buildSettingScreenWithNewImage();
             },
             showSuccess: () {
-              viewToReturn = _buildSuccessScreen();
+              SchedulerBinding.instance!.addPostFrameCallback((_) {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                        opaque: false,
+                        pageBuilder: (_, __, ___) => UserProfileScreen(user: null)));
+              });
+//              viewToReturn = _buildSuccessScreen();
             },
             showImagePicker: () {
               viewToReturn = _showChoosePictureDialog();
@@ -75,7 +83,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
 
   Widget _buildTopToolbar() {
     return Container(
-      margin: EdgeInsets.only(top: 20),
+      margin: EdgeInsets.only(top: 40),
       child: Text(
         'Редактирование профиля',
         style: const TextStyle(fontSize: 30),
@@ -139,7 +147,10 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.white,
                   backgroundColor: Colors.black,
-                  textStyle: const TextStyle(fontSize: 30),
+                  textStyle: const TextStyle(
+                      fontSize: 30,
+
+                  ),
                 ),
                 onPressed: () {
                   if(validateForm()){
@@ -148,7 +159,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
                   }
 
                 },
-                child: const Text('Сохранить '),
+                child: Text('Сохранить'),
               ),
             ],
           ),
